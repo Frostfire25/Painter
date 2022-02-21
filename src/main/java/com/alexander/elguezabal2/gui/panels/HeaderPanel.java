@@ -5,6 +5,7 @@
 package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.gui.listeners.LoadImageListener;
 import java.awt.FlowLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -18,8 +19,6 @@ public class HeaderPanel extends APanel<HeaderPanel> {
         
     private JButton loadImageButton;
     private JButton saveImageButton;
-
-    private ButtonGroup buttonGroup;
     
     public HeaderPanel(Frame frame) {
         super(frame);
@@ -33,10 +32,10 @@ public class HeaderPanel extends APanel<HeaderPanel> {
         this.loadImageButton = new JButton("Load Image");
         this.saveImageButton = new JButton("Save Image");
 
+        // Initilizes Listeners
+        LoadImageListener loadImageListener = new LoadImageListener(this, new Object[]{loadImageButton});
+        this.loadImageButton.addActionListener(loadImageListener);
         
-        this.buttonGroup = new ButtonGroup();
-        this.buttonGroup.add(loadImageButton);
-        this.buttonGroup.add(saveImageButton);
         
         add(loadImageButton);
         add(saveImageButton);

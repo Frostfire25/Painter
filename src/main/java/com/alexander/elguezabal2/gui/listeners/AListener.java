@@ -5,6 +5,9 @@
 package com.alexander.elguezabal2.gui.listeners;
 
 import com.alexander.elguezabal2.gui.panels.APanel;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * Abstract class for all Listeners
@@ -44,6 +47,19 @@ public abstract class AListener<T extends AListener, P extends APanel> {
      */
     public Object[] getObjectsThatCalled() {
         return objectsThatCalled;
+    }
+    
+    /**
+     * Determines if an object was called by this class
+     * 
+     * @param object Object to be checked
+     * @return true if objectsThatCalled contains {@code object}.
+     */
+    public boolean containsSource(Object object) {
+        for(Object n : objectsThatCalled) {
+            if(n == object) return true;
+        }
+        return false;
     }
     
     public abstract T get();
