@@ -4,16 +4,17 @@
  */
 package com.alexander.elguezabal2.managers.images;
 
+import com.alexander.elguezabal2.gui.Frame;
 import java.awt.Image;
 
 /**
  *
  * @author Alex
  */
-public class BaseImage extends AImage implements Filterable {
+public class BaseImage extends AImage<BaseImage> implements Filterable {
 
-    public BaseImage(Image baseImage) {
-        super(baseImage, ImageType.BASE_IMAGE);
+    public BaseImage(Frame frame, Image baseImage) {
+        super(frame, baseImage, ImageType.BASE_IMAGE);
     }
     
     @Override
@@ -21,5 +22,11 @@ public class BaseImage extends AImage implements Filterable {
         // Returns the base image, because this image has no filter
         return getBaseImage();
     }
+
+    @Override
+    public BaseImage get() {
+        return this;
+    }
+
        
 }

@@ -4,13 +4,15 @@
  */
 package com.alexander.elguezabal2.managers.images;
 
+import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.gui.panels.APanel;
 import java.awt.Image;
 
 /**
  *
  * @author Alex
  */
-public abstract class AImage implements Filterable {
+public abstract class AImage<T extends APanel> extends APanel<T> implements Filterable {
     
     private Image baseImage;
     private Image filteredImage; 
@@ -23,7 +25,8 @@ public abstract class AImage implements Filterable {
      * @param imageType The type of image that this class is
      * 
      */
-    public AImage(Image baseImage, ImageType imageType) {
+    public AImage(Frame frame, Image baseImage, ImageType imageType) {
+        super(frame);
         updateImage(baseImage);
         this.imageType = imageType;
     }

@@ -43,7 +43,7 @@ public class MainImageManager {
         Image scaled = image.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_DEFAULT);
         
         // Updates the images 
-        this.baseImage = new BaseImage(scaled);
+        this.baseImage = new BaseImage(Painter.getFrame(), scaled);
         allImages.add(baseImage);
         
         // Updates the type of image on the users screen
