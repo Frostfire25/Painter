@@ -22,8 +22,7 @@ public class MainImageManager {
     // Static image because I only want one to be loaded;
     private static BaseImage baseImage;
     
-    // Static because called from a static refrence.
-    private static HashSet<AImage> allImages;
+    private HashSet<AImage> allImages;
     
     public MainImageManager() {
         this.baseImage = null;
@@ -54,16 +53,9 @@ public class MainImageManager {
         // Updates the image on screen
         Painter.getFrame().getImagePanel().updateImage();
     }
-
-    /**
-     * @return the image
-     */
-    public BaseImage getBaseImage() {
-        return baseImage;
-    }
     
-    public static AImage getImage() {
-        return allImages.stream().filter(n -> n.getImageType() == onScreen).findFirst().get();
+    public AImage getImage() {
+        return allImages.stream().filter(n -> n.getImageType() == onScreen).findFirst().orElse(null);
     }
     
 }
