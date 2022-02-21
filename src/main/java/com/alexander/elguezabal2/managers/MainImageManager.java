@@ -42,15 +42,22 @@ public class MainImageManager {
         // Scales the original image
         Image scaled = image.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_DEFAULT);
         
+        // Resets all images, because we have a new image, new image templates.
+        allImages = new HashSet<>();
+
+        
         // Updates the images 
         this.baseImage = new BaseImage(Painter.getFrame(), scaled);
         allImages.add(baseImage);
+        
+        
         
         // Updates the type of image on the users screen
         // Whenever an image is loaded, we want the base image to be shown.
         onScreen = ImageType.BASE_IMAGE;
        
         // Updates the image on screen
+        Painter.getFrame().getImagePanel().addAllPanels(allImages);
         Painter.getFrame().getImagePanel().updateImage();
     }
     

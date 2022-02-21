@@ -20,6 +20,11 @@ public class HeaderPanel extends APanel<HeaderPanel> {
     private JButton loadImageButton;
     private JButton saveImageButton;
     
+     /**
+     * Default constructor 
+     * 
+     * @param frame frame of this GUI instance
+     */
     public HeaderPanel(Frame frame) {
         super(frame);
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
@@ -28,6 +33,10 @@ public class HeaderPanel extends APanel<HeaderPanel> {
         init();
     }
     
+        
+    /**
+     * Initilizes all components for this class
+     */
     private void init() {
         this.loadImageButton = new JButton("Load Image");
         this.saveImageButton = new JButton("Save Image");

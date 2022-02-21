@@ -6,6 +6,7 @@ package com.alexander.elguezabal2.gui;
 
 import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
+import com.alexander.elguezabal2.gui.panels.TypeImageSelectionPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -35,6 +36,7 @@ public class Frame extends JFrame {
     // Panels
     private HeaderPanel headerPanel;
     private ImagePanel imagePanel;
+    private TypeImageSelectionPanel typeImageSelectionPanel;
 
     public Frame() {
         super("Painter");
@@ -101,7 +103,9 @@ public class Frame extends JFrame {
     private void initPanels() {
         this.headerPanel = new HeaderPanel(this);
         this.imagePanel = new ImagePanel(this);
+        this.typeImageSelectionPanel = new TypeImageSelectionPanel(this);
 
+        add(this.typeImageSelectionPanel, BorderLayout.EAST);
         add(this.getHeaderPanel(), BorderLayout.NORTH);
         add(this.getImagePanel(), BorderLayout.CENTER);
     }
