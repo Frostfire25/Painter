@@ -6,6 +6,7 @@ package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.gui.listeners.DrawingListener;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.MainImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
@@ -44,6 +45,9 @@ public class ImagePanel extends APanel<ImagePanel> {
         // Initilizes Listeners
         MouseListener mouseListener = new MouseListener(this, new Object[]{});
         addMouseListener(mouseListener);
+        
+        DrawingListener drawingListener = new DrawingListener(this, new Object[]{});
+        addMouseListener(drawingListener);
     }
 
     /**
@@ -77,8 +81,8 @@ public class ImagePanel extends APanel<ImagePanel> {
     }
     
     // Info for the image management
-    public static final int IMAGE_X_POINT = 200;
-    public static final int IMAGE_Y_POINT = 111;
+    public static final int IMAGE_X_POINT = 35;
+    public static final int IMAGE_Y_POINT = 112;
         
      /**
      * Paints  surrounding box on screen

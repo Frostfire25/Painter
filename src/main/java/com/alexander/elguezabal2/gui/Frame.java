@@ -4,6 +4,7 @@
  */
 package com.alexander.elguezabal2.gui;
 
+import com.alexander.elguezabal2.gui.panels.DrawingPanel;
 import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
 import com.alexander.elguezabal2.gui.panels.TypeImageSelectionPanel;
@@ -37,6 +38,7 @@ public class Frame extends JFrame {
     private HeaderPanel headerPanel;
     private ImagePanel imagePanel;
     private TypeImageSelectionPanel typeImageSelectionPanel;
+    private DrawingPanel drawingPanel;
 
     public Frame() {
         super("Painter");
@@ -49,7 +51,7 @@ public class Frame extends JFrame {
 
         // Prefered Size
         this.setPreferredSize(new Dimension(GUI_WIDTH, GUI_HEIGHT));
-
+        
         //Resizeable
         this.setResizable(false);
 
@@ -104,10 +106,12 @@ public class Frame extends JFrame {
         this.headerPanel = new HeaderPanel(this);
         this.imagePanel = new ImagePanel(this);
         this.typeImageSelectionPanel = new TypeImageSelectionPanel(this);
+        this.drawingPanel = new DrawingPanel(this);
 
         add(this.typeImageSelectionPanel, BorderLayout.EAST);
         add(this.getHeaderPanel(), BorderLayout.NORTH);
         add(this.getImagePanel(), BorderLayout.CENTER);
+        add(this.drawingPanel, BorderLayout.WEST);
     }
 
     /**

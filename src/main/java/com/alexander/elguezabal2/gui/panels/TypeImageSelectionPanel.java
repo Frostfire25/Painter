@@ -16,7 +16,7 @@ import javax.swing.JRadioButton;
  *
  * @author Alex
  */
-public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
+public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         
     private JLabel header;
     
@@ -40,7 +40,7 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
     }
     
     /**
-     * Initilizes all components for this class
+     * Initilizing all components for this class
      */
     private void init() {
         
@@ -50,29 +50,28 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         this.header = new JLabel("Image Conversions");
         header.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
         
-        // Instantiating Radio Buttons
+        // Initilizing Radio Buttons
         basic = new JRadioButton("Basic");
         grayscale = new JRadioButton("Grayscale");
         inverted = new JRadioButton("Inverted");
         y_axis = new JRadioButton("Y Axis");
         
         
-        // Button Group
+        // Initilizing Button Group
         bg.add(basic);
         bg.add(grayscale);
         bg.add(inverted);
         bg.add(y_axis);
         
-        // Listener
+        // Initilizing Listener
         TypeImageListener listener = new TypeImageListener(this, new Object[]{basic, grayscale, inverted, y_axis});
         basic.addItemListener(listener);
         grayscale.addItemListener(listener);
         inverted.addItemListener(listener);
         y_axis.addItemListener(listener);
 
-        // Font for each Button
+        // Initilizing Font for each Button
         Font font = new Font(Font.MONOSPACED, Font.PLAIN, 17);
-        
         basic.setFont(font);
         grayscale.setFont(font);
         inverted.setFont(font);

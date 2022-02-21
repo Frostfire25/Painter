@@ -7,7 +7,6 @@ package com.alexander.elguezabal2.managers.images;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.panels.APanel;
-import com.alexander.elguezabal2.managers.MainImageManager;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,7 +17,7 @@ import java.awt.image.BufferedImage;
  * @author Alex
  * @param <T> Class type for the instance of this Panel
  */
-public abstract class AImage<T extends APanel> extends APanel<T> implements Filterable {
+public abstract class AImage<T extends APanel> extends APanel<T> implements Filterable, Drawable {
     
     private Image baseImage;
     public Image filteredImage; 
