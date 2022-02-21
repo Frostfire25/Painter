@@ -6,6 +6,7 @@ import com.alexander.elguezabal2.managers.images.BaseImage;
 import com.alexander.elguezabal2.managers.images.GrayScaleImage;
 import com.alexander.elguezabal2.managers.images.ImageType;
 import com.alexander.elguezabal2.managers.images.InvertedColorsImage;
+import com.alexander.elguezabal2.managers.images.YAxisMirroredImage;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class MainImageManager {
     private static BaseImage baseImage;
     private static GrayScaleImage grayScaleImage;
     private static InvertedColorsImage invertedColorsImage;
+    private static YAxisMirroredImage yAxisMirroredImage;
     
     private HashSet<AImage> allImages;
     
@@ -59,11 +61,13 @@ public class MainImageManager {
         this.baseImage = new BaseImage(Painter.getFrame(), scaled);
         this.grayScaleImage = new GrayScaleImage(Painter.getFrame(), scaled);
         this.invertedColorsImage = new InvertedColorsImage(Painter.getFrame(), scaled);
+        this.yAxisMirroredImage = new YAxisMirroredImage(Painter.getFrame(), scaled);
         
         // Adds the image type to the frames collection
         allImages.add(baseImage);
         allImages.add(grayScaleImage);
         allImages.add(invertedColorsImage);
+        allImages.add(yAxisMirroredImage);
         
         // Updates the type of image on the users screen
         // Whenever an image is loaded, we want the base image to be shown.
@@ -101,8 +105,9 @@ public class MainImageManager {
         
         // (! https://mkyong.com/swing/java-swing-jfilechooser-example/)  
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setDialogTitle("Load Picture");
 
-        int returnValue = jfc.showOpenDialog(null);
+        int returnValue = jfc.showOpenDialog(Painter.getFrame());
         // int returnValue = jfc.showSaveDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -135,7 +140,46 @@ public class MainImageManager {
      * Uses JFileChooser, haulting any GUI interaction.
      */
     public void saveImage() {
+        File file = null;
         
+        // (! https://www.codejava.net/java-se/swing/show-save-file-dialog-using-jfilechooser)  
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setDialogTitle("Save Picture");
+        
+        int returnValue = jfc.showSaveDialog(Painter.getFrame());
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            file = jfc.getSelectedFile();
+            
+            System.out.println(file.getPath());
+            // Determines if the file selected is an image, if not an erro is displayed.
+            if (!file.getPath().endsWith(".png") && !file.getPath().endsWith(".jpg")) {
+                JOptionPane.showMessageDialog(null, "A incorrect file-type was selected, please only chose PNGs and JPGs.");
+                return;
+            }
+        }  
+        // Displays an error if no file was selected
+        else {
+            JOptionPane.showMessageDialog(null, "You did not select a file");
+            return;
+        }
+        
+        // Check to see if the file already exists
+        if(file.exists()) {
+            // Prompt the user if they want to override.
+            
+        }
+        
+       /*
+        
+       // Writing the file out
+       try {
+           
+       } catch (IOException e) {
+           e.printStackTrace();
+       }   
+       */
+
     }
     
 }

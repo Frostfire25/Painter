@@ -36,6 +36,8 @@ public class TypeImageListener extends AListener<TypeImageListener, TypeImageSel
         // Gets the Image
         ImageType imageType = ImageType.getByButtonName(((JRadioButton) evt.getSource()).getText());
         
+        System.out.println(imageType.name());
+        
         // Changes the Type
         MainImageManager.setOnScreen(imageType);
         

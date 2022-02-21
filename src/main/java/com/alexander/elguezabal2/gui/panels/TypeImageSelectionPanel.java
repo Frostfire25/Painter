@@ -48,7 +48,7 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         basic = new JRadioButton("Basic");
         grayscale = new JRadioButton("Grayscale");
         inverted = new JRadioButton("Inverted");
-        y_axis = new JRadioButton("Y-Axis");
+        y_axis = new JRadioButton("Y Axis");
         
 
         // Button Group
@@ -58,7 +58,7 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         bg.add(y_axis);
         
         // Listener
-        TypeImageListener listener = new TypeImageListener(this, new Object[]{basic, grayscale, inverted});
+        TypeImageListener listener = new TypeImageListener(this, new Object[]{basic, grayscale, inverted, y_axis});
         basic.addItemListener(listener);
         grayscale.addItemListener(listener);
         inverted.addItemListener(listener);

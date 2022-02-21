@@ -18,10 +18,10 @@ import java.awt.image.BufferedImage;
  *
  * @author Alex
  */
-public class InvertedColorsImage extends AImage<InvertedColorsImage> implements Filterable {
+public class YAxisMirroredImage extends AImage<YAxisMirroredImage> implements Filterable {
 
-    public InvertedColorsImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.INVERTED_COLOR_IMAGE);
+    public YAxisMirroredImage(Frame frame, Image baseImage) {
+        super(frame, baseImage, ImageType.Y_AXIS_MIRRORED_IMAGE);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));
@@ -34,34 +34,37 @@ public class InvertedColorsImage extends AImage<InvertedColorsImage> implements 
     }
     
     /**
-     * Filters {@code image} to Inverted Colors
+     * Filters {@code image} to Y-Axis Mirrored
      * 
      * @param image
      * @return 
      */
     private Image filter(Image image) {
-       
-       BufferedImage bufferedImage = toBufferedImage(image);
+
+        BufferedImage bufferedImage = toBufferedImage(image);
+        BufferedImage refrenceImage = toBufferedImage(image);
         
-        for (int i = 0; i < bufferedImage.getHeight(); i++) {
+        int counter = 0;
+        for (int i = refrenceImage.getWidth()-1; i > (int) refrenceImage.getWidth() / 2; i--) {
 
-            for (int j = 0; j < bufferedImage.getWidth(); j++) {
+            for (int j = 0; j < refrenceImage.getHeight(); j++) {
 
-                Color c = new Color(bufferedImage.getRGB(j, i));
-                int red = (int) (255  - c.getRed());
-                int green = (int) (255 - c.getGreen());
-                int blue = (int) (255 - c.getBlue());
-                Color newColor = new Color(red, green, blue, c.getAlpha());
-
-                bufferedImage.setRGB(j, i, newColor.getRGB());
+                // Perform Half 1
+                Color c = new Color(refrenceImage.getRGB(i, j));                
+                bufferedImage.setRGB(counter, j, c.getRGB());
+                
+                // Perform Half 2
+                Color c2 = new Color(refrenceImage.getRGB(counter, j));                
+                bufferedImage.setRGB(i, j, c2.getRGB());
             }
+            counter++;
         }
         
         return bufferedImage;
     }
 
     @Override
-    public InvertedColorsImage get() {
+    public YAxisMirroredImage get() {
         return this;
     }
     
@@ -75,7 +78,7 @@ public class InvertedColorsImage extends AImage<InvertedColorsImage> implements 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("here painted inverted colors");
+        System.out.println("here painted y-axis mirror.");
         
         // Loads the image, if non-null.
         AImage aImage = Painter.getMainImageManager().getImage();
@@ -90,5 +93,5 @@ public class InvertedColorsImage extends AImage<InvertedColorsImage> implements 
             g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);
         }      
     }
-    
+           
 }
