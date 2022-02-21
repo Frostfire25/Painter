@@ -4,6 +4,7 @@
  */
 package com.alexander.elguezabal2.gui;
 
+import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -21,8 +22,8 @@ import lombok.Getter;
 public class Frame extends JFrame {
     
     // GUI Specifications
-    private final int GUI_WIDTH = 1020;
-    private final int GUI_HEIGHT = 500;
+    private final int GUI_WIDTH = 980;
+    private final int GUI_HEIGHT = 720;
     
     @Getter
     private int GUI_X_BOUNDS; 
@@ -30,6 +31,7 @@ public class Frame extends JFrame {
     private int GUI_Y_BOUNDS; 
 
     // Panels
+    private HeaderPanel headerPanel;
     
     public Frame() {
         super("Painter");
@@ -52,7 +54,7 @@ public class Frame extends JFrame {
         // Sets the icon
         Image icon = null;
         try {
-            icon = ImageIO.read(new File("frame.png"));
+            icon = ImageIO.read(new File("icon.png"));
         } catch(IOException e) {
             e.printStackTrace();
         } catch(NullPointerException e) {
@@ -94,7 +96,9 @@ public class Frame extends JFrame {
     Initizlies all JPanels
     */
     private void initPanels() {
+        this.headerPanel = new HeaderPanel(this);
         
+        add(this.headerPanel, BorderLayout.NORTH);
     }
     
 }

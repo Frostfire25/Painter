@@ -5,7 +5,11 @@
 package com.alexander.elguezabal2;
 
 import com.alexander.elguezabal2.gui.Frame;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * Main class for this project.
@@ -25,6 +29,19 @@ public class Painter {
                 frame = new Frame();
             }
         });
+        
+        /*
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+        int returnValue = jfc.showOpenDialog(null);
+        // int returnValue = jfc.showSaveDialog(null);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = jfc.getSelectedFile();
+            System.out.println(selectedFile.getAbsolutePath());
+        }
+        */
+
     }
     
 }
