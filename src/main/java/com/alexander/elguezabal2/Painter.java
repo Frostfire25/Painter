@@ -1,6 +1,7 @@
 package com.alexander.elguezabal2;
 
 import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.managers.DrawingManager;
 import com.alexander.elguezabal2.managers.MainImageManager;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -14,6 +15,7 @@ public class Painter {
     
     private static Frame frame;
     private static MainImageManager mainImageManager;
+    public static DrawingManager drawingManager;
     
     public static void main(String[] args) {    
         
@@ -24,6 +26,7 @@ public class Painter {
         }
         
         mainImageManager = new MainImageManager();
+        drawingManager = new DrawingManager();
         
         // Loads the frame 
         SwingUtilities.invokeLater(() -> {
@@ -44,6 +47,13 @@ public class Painter {
      */
     public static MainImageManager getMainImageManager() {
         return mainImageManager;
+    }
+
+    /**
+     * @return the drawingManager
+     */
+    public static DrawingManager getDrawingManager() {
+        return drawingManager;
     }
     
 }
