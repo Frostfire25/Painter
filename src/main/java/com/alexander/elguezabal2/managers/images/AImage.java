@@ -18,9 +18,9 @@ import java.awt.Image;
 public abstract class AImage<T extends APanel> extends APanel<T> implements Filterable {
     
     private Image baseImage;
-    private Image filteredImage; 
+    public Image filteredImage; 
     private ImageType imageType;
-    
+        
     /**
      * Default constructor
      * 
@@ -41,7 +41,7 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
      */
     public final void updateImage(Image image) {
         this.baseImage = image;
-        this.filteredImage = getFilteredImage();  
+        this.setFilteredImage(getFilteredImage());  
     }
 
     /**
@@ -56,6 +56,13 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
      */
     public ImageType getImageType() {
         return imageType;
+    }
+    
+     /**
+     * @param filteredImage the filteredImage to set
+     */
+    public void setFilteredImage(Image filteredImage) {
+        this.filteredImage = filteredImage;
     }
     
     /**

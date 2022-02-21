@@ -3,6 +3,7 @@ package com.alexander.elguezabal2.managers;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.managers.images.AImage;
 import com.alexander.elguezabal2.managers.images.BaseImage;
+import com.alexander.elguezabal2.managers.images.GrayScaleImage;
 import com.alexander.elguezabal2.managers.images.ImageType;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MainImageManager {
     
     // Static image because I only want one to be loaded;
     private static BaseImage baseImage;
+    private static GrayScaleImage grayScaleImage;
     
     private HashSet<AImage> allImages;
     
@@ -44,17 +46,21 @@ public class MainImageManager {
         
         // Resets all images, because we have a new image, new image templates.
         allImages = new HashSet<>();
-
         
         // Updates the images 
         this.baseImage = new BaseImage(Painter.getFrame(), scaled);
+        this.grayScaleImage = new GrayScaleImage(Painter.getFrame(), scaled);
+        
+        // Adds the image type to the frames collection
         allImages.add(baseImage);
+        allImages.add(grayScaleImage);
+        
         
         
         
         // Updates the type of image on the users screen
         // Whenever an image is loaded, we want the base image to be shown.
-        onScreen = ImageType.BASE_IMAGE;
+        setOnScreen(ImageType.BASE_IMAGE);
        
         // Updates the image on screen
         Painter.getFrame().getImagePanel().addAllPanels(allImages);
@@ -62,7 +68,21 @@ public class MainImageManager {
     }
     
     public AImage getImage() {
-        return allImages.stream().filter(n -> n.getImageType() == onScreen).findFirst().orElse(null);
+        return allImages.stream().filter(n -> n.getImageType() == getOnScreen()).findFirst().orElse(null);
+    }
+
+    /**
+     * @return the onScreen
+     */
+    public static ImageType getOnScreen() {
+        return onScreen;
+    }
+
+    /**
+     * @param aOnScreen the onScreen to set
+     */
+    public static void setOnScreen(ImageType aOnScreen) {
+        onScreen = aOnScreen;
     }
     
 }

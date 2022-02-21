@@ -10,14 +10,31 @@ package com.alexander.elguezabal2.managers.images;
  */
 public enum ImageType {
     
-    NONE(),
-    BASE_IMAGE(),
-    GRAYSCALE_IMAGE(),
-    INVERTED_COLOR_IMAGE(),
-    Y_AXIS_MIRRORED_IMAGE();
+    NONE(""),
+    BASE_IMAGE("Basic"),
+    GRAYSCALE_IMAGE("Grayscale"),
+    INVERTED_COLOR_IMAGE("Inverted"),
+    Y_AXIS_MIRRORED_IMAGE("Y-Axis");
 
-    ImageType() {
-        
+    public String radioButtonName;
+    
+    ImageType(String radioButtonName) {
+        this.radioButtonName = radioButtonName;
     }
+
+    /**
+     * @return the radioButtonName
+     */
+    public String getRadioButtonName() {
+        return radioButtonName;
+    }
+    
+    public static ImageType getByButtonName(String name) {
+        for(ImageType n : ImageType.values()) {
+            if(n.getRadioButtonName().equals(name)) return n;
+        }
+        
+        return NONE;
+    }  
     
 }

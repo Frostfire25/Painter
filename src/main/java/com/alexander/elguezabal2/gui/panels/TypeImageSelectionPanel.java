@@ -5,6 +5,7 @@
 package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.gui.listeners.TypeImageListener;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -20,6 +21,7 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
     private JRadioButton basic;
     private JRadioButton grayscale;
     private JRadioButton inverted;
+    private JRadioButton y_axis;
     
     private ButtonGroup bg;
     
@@ -42,17 +44,31 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         
         bg = new ButtonGroup();
         
+        // Instantiating Radio Buttons
         basic = new JRadioButton("Basic");
         grayscale = new JRadioButton("Grayscale");
         inverted = new JRadioButton("Inverted");
+        y_axis = new JRadioButton("Y-Axis");
+        
 
+        // Button Group
         bg.add(basic);
         bg.add(grayscale);
         bg.add(inverted);
+        bg.add(y_axis);
         
+        // Listener
+        TypeImageListener listener = new TypeImageListener(this, new Object[]{basic, grayscale, inverted});
+        basic.addItemListener(listener);
+        grayscale.addItemListener(listener);
+        inverted.addItemListener(listener);
+        y_axis.addItemListener(listener);
+
+        // Adding to Panel
         add(basic);
         add(grayscale);
         add(inverted);
+        add(y_axis);
     }
 
     @Override

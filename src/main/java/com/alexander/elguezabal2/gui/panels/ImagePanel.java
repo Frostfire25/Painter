@@ -9,6 +9,7 @@ import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.MainImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
+import com.alexander.elguezabal2.managers.images.ImageType;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -63,10 +64,12 @@ public class ImagePanel extends APanel<ImagePanel> {
         AImage aImage = Painter.getMainImageManager().getImage();
         
         // If the image exists, we will load in the one needed to be displayed on screen
-        if(aImage != null) {
-            System.out.println(""+aImage.getImageType().name());
+        if(aImage != null && aImage.getImageType() != ImageType.NONE) {            
             cards.show(this, aImage.getImageType().name()); 
             revalidate();
+            
+            System.out.println(""+aImage.getImageType().name());
+            
             repaint();
         }
     }

@@ -42,13 +42,11 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("here painted");
+        System.out.println("here painted baseimage");
         
         // Loads the image, if non-null.
         AImage aImage = Painter.getMainImageManager().getImage();
-                
-        System.out.println(Painter.getMainImageManager().getImage().getBaseImage().getSource());
-        
+                        
         if(aImage != null) {
             Image image = aImage.getFilteredImage();
             g.drawImage(image, ImagePanel.IMAGE_X_POINT, ImagePanel.IMAGE_Y_POINT, image.getWidth(getFrame()), image.getHeight(getFrame()), getFrame());
