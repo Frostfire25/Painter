@@ -8,6 +8,8 @@ import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.MainImageManager;
+import com.alexander.elguezabal2.managers.images.AImage;
+import com.alexander.elguezabal2.managers.images.BaseImage;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -48,9 +50,10 @@ public class ImagePanel extends APanel<ImagePanel> {
     public void paintComponent(Graphics g) {
         
         // Loads the image, if non-null.
-        Image image = Painter.getMainImageManager().getImage();
-        if(image != null) {
-              
+        AImage aImage = Painter.getMainImageManager().getBaseImage();
+                
+        if(aImage != null) {
+            Image image = aImage.getFilteredImage();
             g.drawImage(image, IMAGE_X_POINT, IMAGE_Y_POINT, image.getWidth(frame), image.getHeight(frame), frame);
             
         }
