@@ -14,9 +14,9 @@ import javax.swing.JButton;
  *
  * @author Alex
  */
-public class LoadImageListener extends AListener<LoadImageListener, HeaderPanel> implements ActionListener {
+public class SaveImageListener extends AListener<SaveImageListener, HeaderPanel> implements ActionListener {
 
-    public LoadImageListener(HeaderPanel headerPanel, Object[] objects) {
+    public SaveImageListener(HeaderPanel headerPanel, Object[] objects) {
         super(headerPanel, objects);
         
     }
@@ -25,13 +25,13 @@ public class LoadImageListener extends AListener<LoadImageListener, HeaderPanel>
     public void actionPerformed(ActionEvent evt) {
         // If this button did not call.
         if(evt.getSource() == null || !containsSource(evt.getSource()) || !(evt.getSource() instanceof JButton)) return;
-                
-        // Loads the Image
-        Painter.getMainImageManager().loadImage();
+        
+        // Saves the image
+        Painter.getMainImageManager().saveImage();
     }
     
     @Override
-    public LoadImageListener get() {
+    public SaveImageListener get() {
         return this;
     }
     

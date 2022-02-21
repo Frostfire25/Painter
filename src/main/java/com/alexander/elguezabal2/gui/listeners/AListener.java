@@ -5,9 +5,6 @@
 package com.alexander.elguezabal2.gui.listeners;
 
 import com.alexander.elguezabal2.gui.panels.APanel;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
  * Abstract class for all Listeners

@@ -9,10 +9,12 @@ import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.MainImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
+import com.alexander.elguezabal2.managers.images.ImageType;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.util.Set;
 
 /**
  *
@@ -20,15 +22,21 @@ import java.awt.Image;
  */
 public class ImagePanel extends APanel<ImagePanel> {
 
+    private CardLayout cards;
+    
     /**
      * Default constructor
      * @param frame Instance of the frame that uses this panel
      */
     public ImagePanel(Frame frame) {
         super(frame);
-        this.setLayout(new CardLayout());
+        
+        cards = new CardLayout();
+        
+        this.setLayout(cards);
         setSize(new Dimension(400, 400));
-         
+        setBackground(Color.LIGHT_GRAY);
+        
         init();
     }
     
@@ -51,35 +59,60 @@ public class ImagePanel extends APanel<ImagePanel> {
      * Updates the image on screen
      */
     public void updateImage() {  
+        // Pain the current image on the screen.
         repaint();
+        
+        // Find the new image to update
+        AImage aImage = Painter.getMainImageManager().getImage();
+        
+        // If the image exists, we will load in the one needed to be displayed on screen
+        if(aImage != null && aImage.getImageType() != ImageType.NONE) {            
+            cards.show(this, aImage.getImageType().name()); 
+            revalidate();
+            
+            System.out.println(""+aImage.getImageType().name());
+            
+            repaint();
+        }
     }
     
-    private final int IMAGE_X_POINT = 301;
-    private final int IMAGE_Y_POINT = 111;
-    
-    /**
-     * Paints The image and a surrounding box on screen
-     * Only paints an image if an image is loaded.
+    // Info for the image management
+    public static final int IMAGE_X_POINT = 200;
+    public static final int IMAGE_Y_POINT = 111;
+        
+     /**
+     * Paints  surrounding box on screen
      * 
      * @param g Graphics.
      */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        // Loads the image, if non-null.
-        AImage aImage = Painter.getMainImageManager().getImage();
-                
-        if(aImage != null) {
-            Image image = aImage.getFilteredImage();
-            g.drawImage(image, IMAGE_X_POINT, IMAGE_Y_POINT, image.getWidth(getFrame()), image.getHeight(getFrame()), getFrame());
-        }
+               
+        g.draw3DRect(0, 0, getWidth()-1, getHeight()-1, true);
         
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
-            g.draw3DRect(IMAGE_X_POINT-i, IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);
+            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);   
         }
-                
-    }
+        
+        // Fills the inside of the painter
+        g.setColor(Color.WHITE);
+        g.fill3DRect(200, 1000, 493, 601, true);
+                     
+    }    
     
+    /**
+     * Adds all image panels to this panel (Card Layout)
+     * 
+     * @param images Collection of images to be added.
+     */
+    public void addAllPanels(Set<AImage> images) {
+        removeAll();
+        repaint();
+        
+        images.forEach(n -> {
+            add(n, n.getImageType().name());
+        });
+    }
 }

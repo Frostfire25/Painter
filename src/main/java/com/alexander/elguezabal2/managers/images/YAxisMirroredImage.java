@@ -8,27 +8,63 @@ import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
 import com.alexander.elguezabal2.managers.MainImageManager;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Alex
  */
-public class BaseImage extends AImage<BaseImage> implements Filterable {
+public class YAxisMirroredImage extends AImage<YAxisMirroredImage> implements Filterable {
 
-    public BaseImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.BASE_IMAGE);
+    public YAxisMirroredImage(Frame frame, Image baseImage) {
+        super(frame, baseImage, ImageType.Y_AXIS_MIRRORED_IMAGE);
+        
+        // Sets the filtered image
+        setFilteredImage(filter(baseImage));
     }
     
     @Override
     public Image getFilteredImage() {
         // Returns the base image, because this image has no filter
-        return getBaseImage();
+        return filteredImage;
+    }
+    
+    /**
+     * Filters {@code image} to Y-Axis Mirrored
+     * 
+     * @param image
+     * @return 
+     */
+    private Image filter(Image image) {
+
+        BufferedImage bufferedImage = toBufferedImage(image);
+        BufferedImage refrenceImage = toBufferedImage(image);
+        
+        int counter = 0;
+        for (int i = refrenceImage.getWidth()-1; i > (int) refrenceImage.getWidth() / 2; i--) {
+
+            for (int j = 0; j < refrenceImage.getHeight(); j++) {
+
+                // Perform Half 1
+                Color c = new Color(refrenceImage.getRGB(i, j));                
+                bufferedImage.setRGB(counter, j, c.getRGB());
+                
+                // Perform Half 2
+                Color c2 = new Color(refrenceImage.getRGB(counter, j));                
+                bufferedImage.setRGB(i, j, c2.getRGB());
+            }
+            counter++;
+        }
+        
+        return bufferedImage;
     }
 
     @Override
-    public BaseImage get() {
+    public YAxisMirroredImage get() {
         return this;
     }
     
@@ -42,7 +78,7 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("here painted baseimage");
+        System.out.println("here painted y-axis mirror.");
         
         // Loads the image, if non-null.
         AImage aImage = Painter.getMainImageManager().getImage();
@@ -55,9 +91,7 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
             g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);
-        }
-                
+        }      
     }
-
-       
+           
 }

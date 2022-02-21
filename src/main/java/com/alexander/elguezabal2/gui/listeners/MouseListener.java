@@ -4,10 +4,7 @@
  */
 package com.alexander.elguezabal2.gui.listeners;
 
-import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 /**
