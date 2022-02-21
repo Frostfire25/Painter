@@ -4,7 +4,6 @@
  */
 package com.alexander.elguezabal2.gui;
 
-import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
 import java.awt.BorderLayout;
@@ -25,7 +24,7 @@ import lombok.Getter;
 public class Frame extends JFrame {
 
     // GUI Specifications
-    private final int GUI_WIDTH = 980;
+    private final int GUI_WIDTH = 920;
     private final int GUI_HEIGHT = 720;
 
     @Getter

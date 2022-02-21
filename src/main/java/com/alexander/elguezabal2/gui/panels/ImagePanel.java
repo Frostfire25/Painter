@@ -6,14 +6,11 @@ package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
-import com.alexander.elguezabal2.gui.listeners.LoadImageListener;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.MainImageManager;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.JButton;
 
 /**
  *

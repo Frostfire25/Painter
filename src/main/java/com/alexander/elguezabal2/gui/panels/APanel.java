@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 /**
  * Abstract wrapper for all panels
  * @author Alex
+ * @param <T> The sub class.
  */
 public abstract class APanel<T extends APanel> extends JPanel {
     

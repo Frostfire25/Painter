@@ -17,6 +17,8 @@ import java.util.function.Predicate;
  * 
  * 
  * @author Alex
+ * @param <T> Sub class
+ * @param <P> Panel class using this listener
  */
 public abstract class AListener<T extends AListener, P extends APanel> {
     
