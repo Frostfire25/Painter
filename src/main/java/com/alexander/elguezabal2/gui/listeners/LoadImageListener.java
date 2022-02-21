@@ -4,10 +4,13 @@
  */
 package com.alexander.elguezabal2.gui.listeners;
 
+import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -42,8 +45,9 @@ public class LoadImageListener extends AListener<LoadImageListener, HeaderPanel>
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             file = jfc.getSelectedFile();
             
+            System.out.println(file.getPath());
             // Determines if the file selected is an image, if not an erro is displayed.
-            if (!file.getPath().endsWith(".png") || !file.getPath().endsWith(".jpg")) {
+            if (!file.getPath().endsWith(".png") && !file.getPath().endsWith(".jpg")) {
                 JOptionPane.showMessageDialog(null, "A incorrect file-type was selected, please only chose PNGs and JPGs.");
                 return;
             }
@@ -54,6 +58,13 @@ public class LoadImageListener extends AListener<LoadImageListener, HeaderPanel>
             return;
         }
         
+       try {
+           if (file != null) {
+               Painter.getMainImageManager().loadImage(ImageIO.read(file));
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }       
     }
     
     @Override

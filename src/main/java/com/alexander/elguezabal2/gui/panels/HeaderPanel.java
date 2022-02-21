@@ -45,10 +45,4 @@ public class HeaderPanel extends APanel<HeaderPanel> {
     public HeaderPanel get() {
         return this;
     }
-    
-    public void go() {
-        
-    }
-
-    
 }
