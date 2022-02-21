@@ -6,10 +6,10 @@ package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.TypeImageListener;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
 /**
@@ -18,6 +18,8 @@ import javax.swing.JRadioButton;
  */
 public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         
+    private JLabel header;
+    
     private JRadioButton basic;
     private JRadioButton grayscale;
     private JRadioButton inverted;
@@ -44,13 +46,17 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         
         bg = new ButtonGroup();
         
+        // Initilizes JLabels
+        this.header = new JLabel("Image Conversions");
+        header.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
+        
         // Instantiating Radio Buttons
         basic = new JRadioButton("Basic");
         grayscale = new JRadioButton("Grayscale");
         inverted = new JRadioButton("Inverted");
         y_axis = new JRadioButton("Y Axis");
         
-
+        
         // Button Group
         bg.add(basic);
         bg.add(grayscale);
@@ -64,7 +70,17 @@ public class TypeImageSelectionPanel  extends APanel<TypeImageSelectionPanel> {
         inverted.addItemListener(listener);
         y_axis.addItemListener(listener);
 
+        // Font for each Button
+        Font font = new Font(Font.MONOSPACED, Font.PLAIN, 17);
+        
+        basic.setFont(font);
+        grayscale.setFont(font);
+        inverted.setFont(font);
+        y_axis.setFont(font);
+        
         // Adding to Panel
+        add(header);
+        add(new JLabel("\n "));
         add(basic);
         add(grayscale);
         add(inverted);

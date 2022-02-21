@@ -8,6 +8,7 @@ import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.panels.APanel;
 import com.alexander.elguezabal2.managers.MainImageManager;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -34,6 +35,7 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
         super(frame);
         updateImage(baseImage);
         this.imageType = imageType;
+        setBackground(Color.LIGHT_GRAY);
     }
     
     /**
@@ -75,7 +77,9 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
      */
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);                       
+        super.paintComponent(g);
+        
+        g.draw3DRect(0, 0, getWidth()-1, getHeight()-1, true);
     }
     
         /**

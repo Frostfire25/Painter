@@ -11,6 +11,7 @@ import com.alexander.elguezabal2.managers.MainImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
 import com.alexander.elguezabal2.managers.images.ImageType;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Set;
@@ -34,7 +35,8 @@ public class ImagePanel extends APanel<ImagePanel> {
         
         this.setLayout(cards);
         setSize(new Dimension(400, 400));
-         
+        setBackground(Color.LIGHT_GRAY);
+        
         init();
     }
     
@@ -75,7 +77,7 @@ public class ImagePanel extends APanel<ImagePanel> {
     }
     
     // Info for the image management
-    public static final int IMAGE_X_POINT = 301;
+    public static final int IMAGE_X_POINT = 200;
     public static final int IMAGE_Y_POINT = 111;
         
      /**
@@ -87,11 +89,17 @@ public class ImagePanel extends APanel<ImagePanel> {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
                
+        g.draw3DRect(0, 0, getWidth()-1, getHeight()-1, true);
+        
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
-            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);
+            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);   
         }
-                
+        
+        // Fills the inside of the painter
+        g.setColor(Color.WHITE);
+        g.fill3DRect(200, 1000, 493, 601, true);
+                     
     }    
     
     /**

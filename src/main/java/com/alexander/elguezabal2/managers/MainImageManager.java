@@ -10,12 +10,10 @@ import com.alexander.elguezabal2.managers.images.YAxisMirroredImage;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileSystemView;
 
 /**
  * Manager class for the main image
@@ -42,8 +40,8 @@ public class MainImageManager {
         allImages = new HashSet<>();
     }
     
-    public static final int IMAGE_HEIGHT = 300;
-    public static final int IMAGE_WIDTH = 300;
+    public static final int IMAGE_HEIGHT = 500;
+    public static final int IMAGE_WIDTH = 500;
     
     /**
      * Loads in an image to all the image manager
@@ -104,7 +102,7 @@ public class MainImageManager {
         File file = null;
         
         // (! https://mkyong.com/swing/java-swing-jfilechooser-example/)  
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser jfc = new JFileChooser(System.getProperty("user.home") + "/Pictures");
         jfc.setDialogTitle("Load Picture");
 
         int returnValue = jfc.showOpenDialog(Painter.getFrame());
@@ -140,10 +138,17 @@ public class MainImageManager {
      * Uses JFileChooser, haulting any GUI interaction.
      */
     public void saveImage() {
+        
+        // Gets the image to save
+        AImage aImage = getImage();
+        if(aImage == null) {JOptionPane.showMessageDialog(null, "You have no image loaded to save."); return;}
+        Image image = aImage.getFilteredImage();
+        if(image == null) {JOptionPane.showMessageDialog(null, "You have no image loaded to save."); return;}
+        
         File file = null;
         
         // (! https://www.codejava.net/java-se/swing/show-save-file-dialog-using-jfilechooser)  
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        JFileChooser jfc = new JFileChooser(System.getProperty("user.home") + "/Pictures");
         jfc.setDialogTitle("Save Picture");
         
         int returnValue = jfc.showSaveDialog(Painter.getFrame());
@@ -167,18 +172,22 @@ public class MainImageManager {
         // Check to see if the file already exists
         if(file.exists()) {
             // Prompt the user if they want to override.
+            int value = JOptionPane.showConfirmDialog(null, "This File already exists, would you like to override it?", "File Exists", JOptionPane.YES_NO_OPTION);
+            if(value != 0) return;
             
+            // Delets files
+            file.delete();
         }
         
-       /*
+        String type = (file.getPath().endsWith(".png") ? "png" : "jpg"); 
         
-       // Writing the file out
+       // Writing the Image out
        try {
-           
+           ImageIO.write(aImage.toBufferedImage(image), type, file);
        } catch (IOException e) {
            e.printStackTrace();
        }   
-       */
+       
 
     }
     
