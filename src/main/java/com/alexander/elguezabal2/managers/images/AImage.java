@@ -12,8 +12,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 /**
- *
  * @author Alex
+ * @param <T> Class type for the instance of this Panel
  */
 public abstract class AImage<T extends APanel> extends APanel<T> implements Filterable {
     

@@ -34,37 +34,7 @@ public class LoadImageListener extends AListener<LoadImageListener, HeaderPanel>
         
         JButton button = (JButton) evt.getSource();
         
-        File file = null;
-        
-        // (! https://mkyong.com/swing/java-swing-jfilechooser-example/)  
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-        int returnValue = jfc.showOpenDialog(null);
-        // int returnValue = jfc.showSaveDialog(null);
-
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            file = jfc.getSelectedFile();
-            
-            System.out.println(file.getPath());
-            // Determines if the file selected is an image, if not an erro is displayed.
-            if (!file.getPath().endsWith(".png") && !file.getPath().endsWith(".jpg")) {
-                JOptionPane.showMessageDialog(null, "A incorrect file-type was selected, please only chose PNGs and JPGs.");
-                return;
-            }
-        }  
-        // Displays an error if no file was selected
-        else {
-            JOptionPane.showMessageDialog(null, "You did not select a file");
-            return;
-        }
-        
-       try {
-           if (file != null) {
-               Painter.getMainImageManager().loadImage(ImageIO.read(file));
-           }
-       } catch (IOException e) {
-           e.printStackTrace();
-       }       
+        Painter.getMainImageManager().loadImage();
     }
     
     @Override

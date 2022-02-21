@@ -18,10 +18,10 @@ import java.awt.image.BufferedImage;
  *
  * @author Alex
  */
-public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable {
+public class InvertedColorsImage extends AImage<InvertedColorsImage> implements Filterable {
 
-    public GrayScaleImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.GRAYSCALE_IMAGE);
+    public InvertedColorsImage(Frame frame, Image baseImage) {
+        super(frame, baseImage, ImageType.INVERTED_COLOR_IMAGE);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));
@@ -34,7 +34,7 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
     }
     
     /**
-     * Filters {@code image} to Grayscale
+     * Filters {@code image} to Inverted Colors
      * Used parts of code from !(https://www.tutorialspoint.com/java_dip/grayscale_conversion.htm)
      * 
      * @param image
@@ -49,11 +49,10 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
             for (int j = 0; j < bufferedImage.getWidth(); j++) {
 
                 Color c = new Color(bufferedImage.getRGB(j, i));
-                int red = (int) (c.getRed() * 0.299);
-                int green = (int) (c.getGreen() * 0.587);
-                int blue = (int) (c.getBlue() * 0.114);
-                Color newColor = new Color(red + green + blue,
-                        red + green + blue, red + green + blue);
+                int red = (int) (255  - c.getRed());
+                int green = (int) (255 - c.getGreen());
+                int blue = (int) (255 - c.getBlue());
+                Color newColor = new Color(red, green, blue, c.getAlpha());
 
                 bufferedImage.setRGB(j, i, newColor.getRGB());
             }
@@ -63,7 +62,7 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
     }
 
     @Override
-    public GrayScaleImage get() {
+    public InvertedColorsImage get() {
         return this;
     }
     
@@ -77,7 +76,7 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("here painted grayscale");
+        System.out.println("here painted inverted colors");
         
         // Loads the image, if non-null.
         AImage aImage = Painter.getMainImageManager().getImage();
@@ -122,4 +121,3 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
     }
     
 }
-
