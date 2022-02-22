@@ -4,21 +4,27 @@
  */
 package com.alexander.elguezabal2.managers.drawing;
 
+import java.awt.Color;
+
 /**
  *
  * @author Alex
  */
 public abstract class Tool<T extends Tool> {
   
-    public ToolType toolType;
+    private ToolType toolType;
+    private Color color;
+    public int size;
     
     /**
      * Default Constructor
      * 
      * @param toolType The type of tool this is
      */
-    public Tool(ToolType toolType) {
+    public Tool(ToolType toolType, Color color, int size) {
         this.toolType = toolType;
+        this.color = color;
+        this.size = size;
     }
         
     public abstract T get();
@@ -28,6 +34,34 @@ public abstract class Tool<T extends Tool> {
      */
     public ToolType getToolType() {
         return toolType;
+    }
+    
+        /**
+     * @return the color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
     
 }

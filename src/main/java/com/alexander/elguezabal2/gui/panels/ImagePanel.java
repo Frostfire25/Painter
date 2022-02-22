@@ -8,7 +8,7 @@ import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.DrawingListener;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
-import com.alexander.elguezabal2.managers.MainImageManager;
+import com.alexander.elguezabal2.managers.ImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
 import com.alexander.elguezabal2.managers.images.ImageType;
 import java.awt.CardLayout;
@@ -97,7 +97,7 @@ public class ImagePanel extends APanel<ImagePanel> {
         
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
-            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);   
+            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, ImageManager.IMAGE_WIDTH+1, ImageManager.IMAGE_HEIGHT+1, false);   
         }
         
         // Fills the inside of the painter

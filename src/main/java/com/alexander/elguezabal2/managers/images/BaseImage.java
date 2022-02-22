@@ -7,7 +7,7 @@ package com.alexander.elguezabal2.managers.images;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
-import com.alexander.elguezabal2.managers.MainImageManager;
+import com.alexander.elguezabal2.managers.ImageManager;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -24,7 +24,7 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
     @Override
     public Image getFilteredImage() {
         // Returns the base image, because this image has no filter
-        return getBaseImage();
+        return filteredImage;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
         
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
-            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, MainImageManager.IMAGE_WIDTH+1, MainImageManager.IMAGE_HEIGHT+1, false);
+            g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, ImageManager.IMAGE_WIDTH+1, ImageManager.IMAGE_HEIGHT+1, false);
         }
                 
     }

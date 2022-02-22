@@ -7,7 +7,9 @@ import com.alexander.elguezabal2.managers.images.GrayScaleImage;
 import com.alexander.elguezabal2.managers.images.ImageType;
 import com.alexander.elguezabal2.managers.images.InvertedColorsImage;
 import com.alexander.elguezabal2.managers.images.YAxisMirroredImage;
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -21,7 +23,7 @@ import javax.swing.JOptionPane;
  * 
  * @author Alex
  */
-public class MainImageManager {
+public class ImageManager {
     
     // Static because only one image can be displayed on screen at a time.
     public static ImageType onScreen;
@@ -34,7 +36,7 @@ public class MainImageManager {
     
     private HashSet<AImage> allImages;
     
-    public MainImageManager() {
+    public ImageManager() {
         this.baseImage = null;
         this.onScreen = ImageType.NONE;
         allImages = new HashSet<>();
@@ -92,6 +94,26 @@ public class MainImageManager {
      */
     public static void setOnScreen(ImageType aOnScreen) {
         onScreen = aOnScreen;
+    }
+  
+    /**
+     * Updates the color of a pixel on the current image
+     * 
+     * @param point Point to be colored
+     * @param color Color to color
+     */
+    public void paintOnImage(Point point, Color color, int size) {
+        // Get the current image instance
+        AImage aImage = getImage();
+        
+        // Don't paint on it if it doesn't exist
+        if(aImage == null) return;
+        
+        // Paints on the image and updates it
+        aImage.paintPixel(point, color, size);
+        
+        // Updates the image
+        Painter.getFrame().getImagePanel().updateImage();
     }
     
     /**

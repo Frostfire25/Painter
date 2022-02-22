@@ -11,32 +11,14 @@ import java.awt.Color;
  * @author Alex
  */
 public class Pen extends Tool<Pen> {
-    
-    public Color color;
-    
+        
     public Pen() {
-       super(ToolType.PEN);
-       
-       this.color = Color.BLACK;
+       super(ToolType.PEN, Color.BLACK, 4);
     }
 
     @Override
     public Pen get() {
         return this;
-    }
-
-    /**
-     * @return the color
-     */
-    public Color getColor() {
-        return color;
-    }
-
-    /**
-     * @param color the color to set
-     */
-    public void setColor(Color color) {
-        this.color = color;
     }
     
 }

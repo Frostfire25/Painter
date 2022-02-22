@@ -4,10 +4,9 @@
  */
 package com.alexander.elguezabal2.gui.listeners;
 
-import com.alexander.elguezabal2.Painter;
-import com.alexander.elguezabal2.gui.panels.TypeImageSelectionPanel;
-import com.alexander.elguezabal2.managers.ImageManager;
-import com.alexander.elguezabal2.managers.images.ImageType;
+import com.alexander.elguezabal2.gui.panels.DrawingPanel;
+import com.alexander.elguezabal2.managers.DrawingManager;
+import com.alexander.elguezabal2.managers.drawing.ToolType;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JRadioButton;
@@ -16,7 +15,7 @@ import javax.swing.JRadioButton;
  *
  * @author Alex
  */
-public class TypeImageListener extends AListener<TypeImageListener, TypeImageSelectionPanel> implements ItemListener {
+public class TypeToolListener extends AListener<TypeToolListener, DrawingPanel> implements ItemListener {
 
     /**
      * Default constructor
@@ -25,7 +24,7 @@ public class TypeImageListener extends AListener<TypeImageListener, TypeImageSel
      * @param objectsThatCalled Instance of the object(s) that are calling this
      * listener.
      */
-    public TypeImageListener(TypeImageSelectionPanel aPanel, Object[] objectsThatCalled) {
+    public TypeToolListener(DrawingPanel aPanel, Object[] objectsThatCalled) {
         super(aPanel, objectsThatCalled);
     }
 
@@ -34,20 +33,17 @@ public class TypeImageListener extends AListener<TypeImageListener, TypeImageSel
         if (evt.getSource() == null || !containsSource(evt.getSource()) || !(evt.getSource() instanceof JRadioButton)) return;
         
         // Gets the Image
-        ImageType imageType = ImageType.getByButtonName(((JRadioButton) evt.getSource()).getText());
+        ToolType toolType = ToolType.getByButtonName(((JRadioButton) evt.getSource()).getText());
         
-        System.out.println(imageType.name());
+        // Prints out the Tool Type
+        System.out.println(toolType.name());
         
         // Changes the Type
-        ImageManager.setOnScreen(imageType);
-        
-        // Update the Image Panel
-        Painter.getFrame().getImagePanel().updateImage();
+        DrawingManager.changeSelectedTool(toolType);
     }
 
     @Override
-    public TypeImageListener get() {
+    public TypeToolListener get() {
         return this;
     }
-
 }

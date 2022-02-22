@@ -2,7 +2,7 @@ package com.alexander.elguezabal2;
 
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.managers.DrawingManager;
-import com.alexander.elguezabal2.managers.MainImageManager;
+import com.alexander.elguezabal2.managers.ImageManager;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -14,7 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Painter {
     
     private static Frame frame;
-    private static MainImageManager mainImageManager;
+    private static ImageManager mainImageManager;
     public static DrawingManager drawingManager;
     
     public static void main(String[] args) {    
@@ -25,7 +25,7 @@ public class Painter {
         } catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
         
-        mainImageManager = new MainImageManager();
+        mainImageManager = new ImageManager();
         drawingManager = new DrawingManager();
         
         // Loads the frame 
@@ -45,7 +45,7 @@ public class Painter {
     /**
      * @return the mainImageManager
      */
-    public static MainImageManager getMainImageManager() {
+    public static ImageManager getMainImageManager() {
         return mainImageManager;
     }
 

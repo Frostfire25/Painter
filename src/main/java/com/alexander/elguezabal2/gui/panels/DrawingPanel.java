@@ -6,6 +6,7 @@ package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.frames.ColorPalleteFrame;
+import com.alexander.elguezabal2.gui.listeners.TypeToolListener;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,15 +65,13 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         bg.add(pen);
         bg.add(none);
 
+   
+        // Listener 
+        TypeToolListener listener = new TypeToolListener(this, new Object[]{pen, none});
+        pen.addItemListener(listener);
+        none.addItemListener(listener);
         
-        // Listener
-        /*
-        TypeImageListener listener = new TypeImageListener(this, new Object[]{basic, grayscale, inverted, y_axis});
-        basic.addItemListener(listener);
-        grayscale.addItemListener(listener);
-        inverted.addItemListener(listener);
-        y_axis.addItemListener(listener);
-        */
+
         this.selectColor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
