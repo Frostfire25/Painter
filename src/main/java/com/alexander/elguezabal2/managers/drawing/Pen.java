@@ -4,7 +4,9 @@
  */
 package com.alexander.elguezabal2.managers.drawing;
 
+import com.alexander.elguezabal2.Painter;
 import java.awt.Color;
+import java.awt.Point;
 
 /**
  *
@@ -19,6 +21,16 @@ public class Pen extends Tool<Pen> {
     @Override
     public Pen get() {
         return this;
+    }
+
+    /**
+     * Draw method for a Pen
+     * 
+     * @param point Point to draw at.
+     */
+    @Override
+    public void draw(Point point) {
+        Painter.getMainImageManager().paintOnImage(point, getColor(), getSize());
     }
     
 }
