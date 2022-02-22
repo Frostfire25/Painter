@@ -10,7 +10,7 @@ package com.alexander.elguezabal2.managers.hotkeys;
  */
 public class HotkeyPattern {
     
-    public Integer[] values;
+    private Integer[] values;
     
     public HotkeyPattern(Integer... values) {
         this.values = values;

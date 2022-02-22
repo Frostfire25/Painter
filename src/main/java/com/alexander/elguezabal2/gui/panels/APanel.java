@@ -5,6 +5,7 @@
 package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.gui.listeners.HotkeyListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,6 +25,17 @@ public abstract class APanel<T extends APanel> extends JPanel {
      */
     public APanel(JFrame frame) {
         this.frame = frame;
+        
+        // Adds constance focus listeners
+        initTotalFocusListners();
+    }
+    
+    /**
+     * Applies a listener to each Panel, so said listener will always be infocus
+     * Ex. Key Listeners for Hotkeys.
+     */
+    private void initTotalFocusListners() {
+        addKeyListener(new HotkeyListener(frame));
     }
 
     /**

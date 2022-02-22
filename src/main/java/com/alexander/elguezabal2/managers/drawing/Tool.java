@@ -5,6 +5,7 @@
 package com.alexander.elguezabal2.managers.drawing;
 
 import java.awt.Color;
+import java.awt.Point;
 
 /**
  *
@@ -63,5 +64,12 @@ public abstract class Tool<T extends Tool> {
     public void setSize(int size) {
         this.size = size;
     }
+    
+    /**
+     * Draw method for a tool
+     * 
+     * @param point Point to draw at.
+     */
+    public abstract void draw(Point point);
     
 }

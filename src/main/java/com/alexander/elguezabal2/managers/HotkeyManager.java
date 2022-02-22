@@ -125,8 +125,8 @@ public class HotkeyManager {
      * If any are found, then they are performed
      */
     private void checkForMatches() {
-        // Temp hotkey to compare to
-        Hotkey temphHotkey = new Hotkey("temp", new HotkeyPattern((Integer[]) currentKeysPressed.toArray(new Integer[hotkeys.size()]))) {
+        // Temp hotkey to compare to                
+        Hotkey temphHotkey = new Hotkey("temp", new HotkeyPattern(toArray(currentKeysPressed))) {
             @Override
             public void perform() {
             }
@@ -136,7 +136,28 @@ public class HotkeyManager {
         for(Hotkey n : hotkeys) {
             if(n.equals(temphHotkey)) {
                 n.perform();
+                
+                // Clear the key cache
+                currentKeysPressed.clear();
             }
         }
+    }
+    
+    /**
+     * Creates a new Integer Array from a ArrayList
+     * 
+     * @param list List to be transfered
+     * @return A new Integer array
+     */
+    private Integer[] toArray(ArrayList<Integer> list) {
+               
+        Integer[] ret = new Integer[list.size()];
+        
+        // Loops over all the values in list and adds them to ret
+        for(int i = 0; i < ret.length; i++) {
+            ret[i] = list.get(i);
+        }
+        
+        return ret;
     }
 }

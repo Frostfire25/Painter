@@ -4,6 +4,7 @@
  */
 package com.alexander.elguezabal2.managers.hotkeys;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -44,15 +45,18 @@ public abstract class Hotkey implements Performable {
         
         Hotkey hotkey = (Hotkey) o;
         
+        System.out.println(Arrays.toString(hotkey.getHotkeyPattern().getValues()));
+        System.out.println(Arrays.toString(getHotkeyPattern().getValues()));
+       
         // Gets the other hotkey values
         Integer[] valuesOfOther = hotkey.getHotkeyPattern().getValues();
         
         // Asserts that both patterns have the same length
-        if(valuesOfOther.length != hotkeyPattern.getValues().length) return false;
+        if(valuesOfOther.length != getHotkeyPattern().getValues().length) return false;
         
         // Loops over both patterns
         for(int i = 0; i < valuesOfOther.length; i++) {
-            if(!Objects.equals(valuesOfOther[i], hotkeyPattern.getValues()[i])) return false;
+            if(!Objects.equals(valuesOfOther[i], getHotkeyPattern().getValues()[i])) return false;
         }
         
         return true;

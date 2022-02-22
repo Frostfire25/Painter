@@ -9,6 +9,7 @@ import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JFrame;
 
 /**
  * Not a AListener because it goes to Frame
@@ -31,13 +32,13 @@ public class HotkeyListener implements KeyListener {
     C = 67
     */
     
-    private Frame frame;
+    private JFrame frame;
     
     /**
      * Default constructor
      * @param frame Frame that calls to this listener.
      */
-    public HotkeyListener(Frame frame) {
+    public HotkeyListener(JFrame frame) {
         this.frame = frame;
     }
     

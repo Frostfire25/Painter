@@ -79,7 +79,7 @@ public class DrawingManager {
                     Point point = new Point((int) (oP.getX() - IMAGE_AWAY_FROM_BORDER_X), (int) (oP.getY() - IMAGE_AWAY_FROM_BORDER_Y));
                                         
                     if (!isOutOfBoudns(oP, selectedTool.getSize())) {
-                        Painter.getMainImageManager().paintOnImage(point, selectedTool.getColor(), selectedTool.getSize());
+                        selectedTool.draw(point);
                     }
                 }
             }
