@@ -5,6 +5,7 @@
 package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -14,21 +15,21 @@ import javax.swing.JPanel;
  */
 public abstract class APanel<T extends APanel> extends JPanel {
     
-    public Frame frame;
+    public JFrame frame;
     
     /**
      * Default constructor
      * 
      * @param frame Super frame of this APanel.
      */
-    public APanel(Frame frame) {
+    public APanel(JFrame frame) {
         this.frame = frame;
     }
 
     /**
      * @return the frame
      */
-    public Frame getFrame() {
+    public JFrame getFrame() {
         return frame;
     }
     

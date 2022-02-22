@@ -5,7 +5,6 @@
 package com.alexander.elguezabal2.managers;
 
 import com.alexander.elguezabal2.Painter;
-import com.alexander.elguezabal2.gui.panels.ImagePanel;
 import com.alexander.elguezabal2.managers.drawing.Pen;
 import com.alexander.elguezabal2.managers.drawing.Tool;
 import com.alexander.elguezabal2.managers.drawing.ToolType;
@@ -78,9 +77,8 @@ public class DrawingManager {
                 if(isDrawing) {                    
                     Point oP = MouseInfo.getPointerInfo().getLocation();
                     Point point = new Point((int) (oP.getX() - IMAGE_AWAY_FROM_BORDER_X), (int) (oP.getY() - IMAGE_AWAY_FROM_BORDER_Y));
-                    
-                    System.out.println(point.getX() + " " + point.getY());
-                    if (!isOutOfBoudns(oP)) {
+                                        
+                    if (!isOutOfBoudns(oP, selectedTool.getSize())) {
                         Painter.getMainImageManager().paintOnImage(point, selectedTool.getColor(), selectedTool.getSize());
                     }
                 }
@@ -95,11 +93,11 @@ public class DrawingManager {
      * @param point The point to be checked
      * @return true if it is out of bounds, false if not.
      */
-    private boolean isOutOfBoudns(Point point) {
-        if(point.getX() > (ImageManager.IMAGE_WIDTH + IMAGE_AWAY_FROM_BORDER_X) || point.getY() > (ImageManager.IMAGE_HEIGHT + IMAGE_AWAY_FROM_BORDER_Y))
+    private boolean isOutOfBoudns(Point point, int size) {
+        if(point.getX() > (ImageManager.IMAGE_WIDTH + IMAGE_AWAY_FROM_BORDER_X + size) || point.getY() > (ImageManager.IMAGE_HEIGHT + IMAGE_AWAY_FROM_BORDER_Y + size))
             return true;
         
-        if(point.getX() < IMAGE_AWAY_FROM_BORDER_X || point.getY() < IMAGE_AWAY_FROM_BORDER_Y)
+        if(point.getX() < (IMAGE_AWAY_FROM_BORDER_X + size) || point.getY() < (IMAGE_AWAY_FROM_BORDER_Y + size))
             return true;
             
         return false;
@@ -127,7 +125,16 @@ public class DrawingManager {
             isDrawing = false;
         }
     }
+        
+    /**
+     * Changes the color of the current tool
+     * 
+     * @param color Color to be changed to
+     */
+    public void updateColor(Color color) {
+        if(selectedTool != null && selectedTool.getToolType() != ToolType.NONE) {
+            selectedTool.setColor(color);
+        }
+    }
     
-    
-       
 }

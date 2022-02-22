@@ -13,7 +13,7 @@ import java.awt.Color;
 public class Pen extends Tool<Pen> {
         
     public Pen() {
-       super(ToolType.PEN, Color.BLACK, 4);
+       super(ToolType.PEN, Color.BLACK, 5);
     }
 
     @Override

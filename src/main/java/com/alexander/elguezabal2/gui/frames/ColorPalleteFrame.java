@@ -5,13 +5,12 @@
 package com.alexander.elguezabal2.gui.frames;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import com.alexander.elguezabal2.gui.panels.ColorPanel;
 
 /**
  *
@@ -27,12 +26,14 @@ public class ColorPalleteFrame extends JFrame {
     
     private ColorPanel colorPanel;
     
+    /**
+     * Default Constructor for Color Pallete Frame
+     */
     public ColorPalleteFrame() {
         super("Click to Choose a Color");
         
         // Reads the file for the pallete
         try {
-            
             Image tempImage = ImageIO.read(new File("collor-pallete.png"));
             image = tempImage.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
             
@@ -46,34 +47,15 @@ public class ColorPalleteFrame extends JFrame {
 
         setSize(new Dimension(WIDTH, HEIGHT));
         
-        colorPanel = new ColorPanel(image, WIDTH, HEIGHT);
+        colorPanel = new ColorPanel(this, image, WIDTH, HEIGHT);
         add(colorPanel);
         
+        // Shows the frame
         this.setVisible(true);
         
-        
+        // Updat the frame
         revalidate();
         repaint();
     }
-    
-
-    
 }
-class ColorPanel extends JPanel {
 
-    private Image image;
-    
-    public ColorPanel(Image image, int width, int height) {
-        this.image = image;
-        setSize(new Dimension(width, height));
-    }
-    
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        System.out.println("called");
-        g.drawImage(image, WIDTH-1, HEIGHT-1, this);
-    }
-    
-}
