@@ -58,36 +58,71 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         
         
         // Initilizing Button Group
-        bg.add(basic);
-        bg.add(grayscale);
-        bg.add(inverted);
-        bg.add(y_axis);
+        this.bg.add(getBasic());
+        this.bg.add(getGrayscale());
+        this.bg.add(getInverted());
+        this.bg.add(getY_axis());
         
         // Initilizing Listener
-        TypeImageListener listener = new TypeImageListener(this, new Object[]{basic, grayscale, inverted, y_axis});
-        basic.addItemListener(listener);
-        grayscale.addItemListener(listener);
-        inverted.addItemListener(listener);
-        y_axis.addItemListener(listener);
+        TypeImageListener listener = new TypeImageListener(this, new Object[]{getBasic(), getGrayscale(), getInverted(), getY_axis()});
+        getBasic().addItemListener(listener);
+        getGrayscale().addItemListener(listener);
+        getInverted().addItemListener(listener);
+        getY_axis().addItemListener(listener);
 
         // Initilizing Font for each Button
         Font font = new Font(Font.MONOSPACED, Font.PLAIN, 17);
-        basic.setFont(font);
-        grayscale.setFont(font);
-        inverted.setFont(font);
-        y_axis.setFont(font);
-        
+        getBasic().setFont(font);
+        getGrayscale().setFont(font);
+        getInverted().setFont(font);
+        getY_axis().setFont(font);
+               
         // Adding to Panel
         add(header);
         add(new JLabel("\n "));
-        add(basic);
-        add(grayscale);
-        add(inverted);
-        add(y_axis);
+        add(getBasic());
+        add(getGrayscale());
+        add(getInverted());
+        add(getY_axis());
     }
 
     @Override
     public TypeImageSelectionPanel get() {
         return this;
+    }
+
+    /**
+     * @return the basic
+     */
+    public JRadioButton getBasic() {
+        return basic;
+    }
+
+    /**
+     * @return the grayscale
+     */
+    public JRadioButton getGrayscale() {
+        return grayscale;
+    }
+
+    /**
+     * @return the inverted
+     */
+    public JRadioButton getInverted() {
+        return inverted;
+    }
+
+    /**
+     * @return the y_axis
+     */
+    public JRadioButton getY_axis() {
+        return y_axis;
+    }
+
+    /**
+     * @return the bg
+     */
+    public ButtonGroup getButtonGroup() {
+        return bg;
     }
 }

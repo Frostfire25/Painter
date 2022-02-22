@@ -2,6 +2,7 @@ package com.alexander.elguezabal2;
 
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.managers.DrawingManager;
+import com.alexander.elguezabal2.managers.HotkeyManager;
 import com.alexander.elguezabal2.managers.ImageManager;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -9,25 +10,28 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Main class for this project.
+ *
  * @author Alex
  */
 public class Painter {
-    
+
     private static Frame frame;
     private static ImageManager mainImageManager;
-    public static DrawingManager drawingManager;
-    
-    public static void main(String[] args) {    
-        
+    private static DrawingManager drawingManager;
+    private static HotkeyManager hotkeyManager;
+
+    public static void main(String[] args) {
+
         // Updates the look and feel to windows.
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
-        
+
         mainImageManager = new ImageManager();
         drawingManager = new DrawingManager();
-        
+        hotkeyManager = new HotkeyManager();
+
         // Loads the frame 
         SwingUtilities.invokeLater(() -> {
             // Assigns the frame
@@ -55,5 +59,12 @@ public class Painter {
     public static DrawingManager getDrawingManager() {
         return drawingManager;
     }
-    
+
+    /**
+     * @return the hotkeyManager
+     */
+    public static HotkeyManager getHotkeyManager() {
+        return hotkeyManager;
+    }
+
 }

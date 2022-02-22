@@ -1,5 +1,6 @@
 package com.alexander.elguezabal2.gui;
 
+import com.alexander.elguezabal2.gui.listeners.HotkeyListener;
 import com.alexander.elguezabal2.gui.panels.DrawingPanel;
 import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
@@ -68,6 +69,9 @@ public class Frame extends JFrame {
         if (icon != null) {
             this.setIconImage(icon);
         }
+        
+        // Allows this frame to be focusable
+        setFocusable(true);
 
         // Packs the frame
         pack();
@@ -93,6 +97,7 @@ public class Frame extends JFrame {
      */
     private void init() {
         initPanels();
+        initListeners();
     }
 
     /*
@@ -104,10 +109,18 @@ public class Frame extends JFrame {
         this.typeImageSelectionPanel = new TypeImageSelectionPanel(this);
         this.drawingPanel = new DrawingPanel(this);
 
-        add(this.typeImageSelectionPanel, BorderLayout.EAST);
+        add(this.getTypeImageSelectionPanel(), BorderLayout.EAST);
         add(this.getHeaderPanel(), BorderLayout.NORTH);
         add(this.getImagePanel(), BorderLayout.CENTER);
-        add(this.drawingPanel, BorderLayout.WEST);
+        add(this.getDrawingPanel(), BorderLayout.WEST);
+    }
+    
+    /**
+     * Initilizes all listeners
+     */
+    private void initListeners() {
+        HotkeyListener hotkeyListener = new HotkeyListener(this);
+        addKeyListener(hotkeyListener);
     }
 
     /**
@@ -124,4 +137,18 @@ public class Frame extends JFrame {
         return imagePanel;
     }
 
+    /**
+     * @return the typeImageSelectionPanel
+     */
+    public TypeImageSelectionPanel getTypeImageSelectionPanel() {
+        return typeImageSelectionPanel;
+    }
+
+    /**
+     * @return the drawingPanel
+     */
+    public DrawingPanel getDrawingPanel() {
+        return drawingPanel;
+    }
+   
 }

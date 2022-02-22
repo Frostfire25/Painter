@@ -7,6 +7,7 @@ package com.alexander.elguezabal2.gui.panels;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.DrawingListener;
+import com.alexander.elguezabal2.gui.listeners.HotkeyListener;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.ImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
