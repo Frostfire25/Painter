@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -51,8 +52,8 @@ public class CartoonifyImage extends AImage<CartoonifyImage> {
        BufferedImage refrenceImage = toBufferedImage(image);           
        
         // Does Cartoonify
-        for (int i = 1; i < ImageManager.IMAGE_WIDTH - 1; i++) {
-            for (int j = 1; j < ImageManager.IMAGE_HEIGHT - 1; j++) {
+        for (int i = 2; i < ImageManager.IMAGE_WIDTH - 2; i++) {
+            for (int j = 2; j < ImageManager.IMAGE_HEIGHT - 2; j++) {
                 
                 //Color c = new Color(bufferedImage.getRGB(j, i));
 
@@ -84,31 +85,33 @@ public class CartoonifyImage extends AImage<CartoonifyImage> {
      */
     private Color calculateMedianColorOfAnPoint(BufferedImage bf, Point[] matrix) {
         
+        int alpha = 0;
+        
         // List of the rgb values in the matrix
-        ArrayList<Integer> redMatrix = new ArrayList<>();
-        ArrayList<Integer> greenMatrix = new ArrayList<>();
-        ArrayList<Integer> blueMatrix = new ArrayList<>();
+        int[] redMatrix = new int[25];
+        int[] greenMatrix = new int[25];
+        int[] blueMatrix = new int[25];
                 
         // Loops through all points and adds them to colorMatrix
-        for(int i = 0; i < 9; i++) {
+        for(int i = 0; i < 25; i++) {
             // Color of the pixel
             Color color = new Color(bf.getRGB(matrix[i].x, matrix[i].y));
 
             // Adds the RGB values
-            redMatrix.add(color.getRed());
-            greenMatrix.add(color.getGreen());
-            blueMatrix.add(color.getBlue());
+            redMatrix[i] = color.getRed();
+            greenMatrix[i] = color.getGreen();
+            blueMatrix[i] = color.getBlue();
 
+            alpha = color.getAlpha();
         }
         
         // Sorts the matracies
-        Collections.sort(redMatrix);
-        Collections.sort(greenMatrix);
-        Collections.sort(blueMatrix);
-
-        
+        Arrays.sort(redMatrix);
+        Arrays.sort(greenMatrix);
+        Arrays.sort(blueMatrix);
+                                                
         // Gets the Median color
-        return new Color(redMatrix.get(4), blueMatrix.get(4), greenMatrix.get(4), 255);
+        return new Color(redMatrix[13], greenMatrix[13], blueMatrix[13], alpha);
     }
     
     /**
@@ -119,7 +122,7 @@ public class CartoonifyImage extends AImage<CartoonifyImage> {
      * @return a 3x3 matrix of points
      */
     private Point[] getMatrixFromPoint(int i, int j) {
-        Point[] matrix = new Point[9];
+        Point[] matrix = new Point[25];
         matrix[0] = new Point(j - 1, i - 1);
         matrix[1] = new Point(j - 1, i);
         matrix[2] = new Point(j - 1, i + 1);
@@ -131,6 +134,29 @@ public class CartoonifyImage extends AImage<CartoonifyImage> {
         matrix[6] = new Point(j + 1, i - 1);
         matrix[7] = new Point(j + 1, i);
         matrix[8] = new Point(j + 1, i + 1);
+        
+        matrix[9] = new Point(j - 2, i - 1);
+        matrix[10] = new Point(j - 2, i);
+        matrix[11] = new Point(j - 2, i + 1);
+        
+        matrix[12] = new Point(j, i - 2);
+        matrix[13] = new Point(j, i + 1);
+        matrix[14] = new Point(j, i + 2);
+        
+        matrix[15] = new Point(j + 2, i - 1);
+        matrix[16] = new Point(j + 2, i);
+        matrix[17] = new Point(j + 2, i + 1);
+        
+        matrix[18] = new Point(j, i + 2);
+        matrix[19] = new Point(j, i - 2);
+        
+        matrix[20] = new Point(j - 1, i + 2);
+        matrix[21] = new Point(j - 1, i - 2);
+        
+        matrix[22] = new Point(j - 2, i + 2);
+        matrix[23] = new Point(j - 2, i - 2);
+        matrix[23] = new Point(j + 2, i + 2);
+        matrix[24] = new Point(j + 2, i - 2);
         
         return matrix;
     }
