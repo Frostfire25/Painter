@@ -10,7 +10,6 @@ import com.alexander.elguezabal2.gui.panels.ImagePanel;
 import com.alexander.elguezabal2.managers.ImageManager;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -18,28 +17,28 @@ import java.awt.image.BufferedImage;
  *
  * @author Alex
  */
-public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable {
+public class CartoonifyImage extends AImage<CartoonifyImage> {
 
-    public GrayScaleImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.GRAYSCALE_IMAGE);
+     /**
+     * Default Constructor for CartoonifyImage
+     * 
+     * @param frame Super frame
+     * @param baseImage Basic version of the image
+     */
+    public CartoonifyImage(Frame frame, Image baseImage) {
+        super(frame, baseImage, ImageType.CARTOONIFY_IMAGE);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));
         
-        initTotalFocusListnersForSubComponents();        
+        initTotalFocusListnersForSubComponents();
     }
     
-    @Override
-    public Image getFilteredImage() {
-        // Returns the base image, because this image has no filter
-        return filteredImage;
-    }
-    
-    /**
-     * Filters {@code image} to Grayscale
-     * Used parts of code from !(https://www.tutorialspoint.com/java_dip/grayscale_conversion.htm)
+        /**
+     * Filters {@code image} to Cartoonify
+     * Used parts of code from 
      * 
-     * @param image
+     * @param image Image to be filtered
      * @return 
      */
     private Image filter(Image image) {
@@ -51,22 +50,13 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
             for (int j = 0; j < bufferedImage.getWidth(); j++) {
 
                 Color c = new Color(bufferedImage.getRGB(j, i));
-                int red = (int) (c.getRed() * 0.299);
-                int green = (int) (c.getGreen() * 0.587);
-                int blue = (int) (c.getBlue() * 0.114);
-                Color newColor = new Color(red + green + blue,
-                        red + green + blue, red + green + blue);
 
+                Color newColor = new Color(1,1,1, c.getAlpha());
                 bufferedImage.setRGB(j, i, newColor.getRGB());
             }
         }
         
         return bufferedImage;
-    }
-
-    @Override
-    public GrayScaleImage get() {
-        return this;
     }
     
     /**
@@ -79,7 +69,7 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("here painted grayscale");
+        System.out.println("here painted Cartoonify Image");
         
         // Loads the image, if non-null.
         AImage aImage = Painter.getMainImageManager().getImage();
@@ -92,8 +82,18 @@ public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
             g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, ImageManager.IMAGE_WIDTH+1, ImageManager.IMAGE_HEIGHT+1, false);
-        }      
+        }
+                
     }
-      
+    
+    @Override
+    public Image getFilteredImage() {
+        return filteredImage;
+    }
+    
+    @Override
+    public CartoonifyImage get() {
+        return this;
+    }
+    
 }
-

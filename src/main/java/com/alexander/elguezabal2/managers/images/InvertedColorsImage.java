@@ -24,6 +24,8 @@ public class InvertedColorsImage extends AImage<InvertedColorsImage> implements 
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));
+        
+        initTotalFocusListnersForSubComponents();        
     }
     
     @Override

@@ -3,6 +3,7 @@ package com.alexander.elguezabal2.managers;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.managers.images.AImage;
 import com.alexander.elguezabal2.managers.images.BaseImage;
+import com.alexander.elguezabal2.managers.images.CartoonifyImage;
 import com.alexander.elguezabal2.managers.images.GrayScaleImage;
 import com.alexander.elguezabal2.managers.images.ImageType;
 import com.alexander.elguezabal2.managers.images.InvertedColorsImage;
@@ -33,6 +34,7 @@ public class ImageManager {
     private static GrayScaleImage grayScaleImage;
     private static InvertedColorsImage invertedColorsImage;
     private static YAxisMirroredImage yAxisMirroredImage;
+    private static CartoonifyImage cartoonifyImage;
     
     private HashSet<AImage> allImages;
     
@@ -62,12 +64,14 @@ public class ImageManager {
         this.grayScaleImage = new GrayScaleImage(Painter.getFrame(), scaled);
         this.invertedColorsImage = new InvertedColorsImage(Painter.getFrame(), scaled);
         this.yAxisMirroredImage = new YAxisMirroredImage(Painter.getFrame(), scaled);
+        this.cartoonifyImage = new CartoonifyImage(Painter.getFrame(), scaled);
         
         // Adds the image type to the frames collection
         allImages.add(baseImage);
         allImages.add(grayScaleImage);
         allImages.add(invertedColorsImage);
         allImages.add(yAxisMirroredImage);
+        allImages.add(cartoonifyImage);
         
         // Updates the type of image on the users screen
         // Whenever an image is loaded, we want the base image to be shown.

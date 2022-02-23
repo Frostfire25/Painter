@@ -14,7 +14,8 @@ public enum ImageType {
     BASE_IMAGE("Basic"),
     GRAYSCALE_IMAGE("Grayscale"),
     INVERTED_COLOR_IMAGE("Inverted"),
-    Y_AXIS_MIRRORED_IMAGE("Y Axis");
+    Y_AXIS_MIRRORED_IMAGE("Y Axis"),
+    CARTOONIFY_IMAGE("Cartoonify");
 
     public String radioButtonName;
     

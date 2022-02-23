@@ -88,12 +88,12 @@ public class HotkeyManager {
             }
         });
         
-        // Cartoon-Filter
-        hotkeys.add(new Hotkey("Cartoon-Filter", new HotkeyPattern(new Integer[]{16, 67})) {
+        // Cartoonify-Filter
+        hotkeys.add(new Hotkey("Cartoonify-Filter", new HotkeyPattern(new Integer[]{16, 67})) {
             @Override
             public void perform() {
                 // Displays a cartoon filter
-                //Painter.getFrame().getTypeImageSelectionPanel().getButtonGroup().setSelected(Painter.getFrame().getTypeImageSelectionPanel().getY_axis().getModel(), true);
+                Painter.getFrame().getTypeImageSelectionPanel().getButtonGroup().setSelected(Painter.getFrame().getTypeImageSelectionPanel().getCartoonify().getModel(), true);
             }
         });
     }

@@ -4,8 +4,10 @@
  */
 package com.alexander.elguezabal2.gui.panels;
 
+import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.HotkeyListener;
+import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -26,6 +28,9 @@ public abstract class APanel<T extends APanel> extends JPanel {
     public APanel(JFrame frame) {
         this.frame = frame;
         
+        // Makes this component focusable
+        this.setFocusable(true);
+        
         // Adds constance focus listeners
         initTotalFocusListners();
     }
@@ -35,7 +40,17 @@ public abstract class APanel<T extends APanel> extends JPanel {
      * Ex. Key Listeners for Hotkeys.
      */
     private void initTotalFocusListners() {
-        addKeyListener(new HotkeyListener(frame));
+        addKeyListener(Frame.getHotkeyListener());
+    }
+    
+    /**
+     * Applies a listener to each component in a panel
+     */
+    public void initTotalFocusListnersForSubComponents() {
+        // Loops over every sub component in this frame and adds the listener
+        for(Component n : getComponents()) {
+            n.addKeyListener(Frame.getHotkeyListener());
+        }
     }
 
     /**
@@ -46,5 +61,5 @@ public abstract class APanel<T extends APanel> extends JPanel {
     }
     
     public abstract T get();
-    
+        
 }

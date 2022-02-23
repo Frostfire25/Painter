@@ -24,6 +24,7 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
     private JRadioButton grayscale;
     private JRadioButton inverted;
     private JRadioButton y_axis;
+    public JRadioButton cartoonify;
     
     private ButtonGroup bg;
     
@@ -37,6 +38,7 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         init();
+        initTotalFocusListnersForSubComponents();        
     }
     
     /**
@@ -55,6 +57,7 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         grayscale = new JRadioButton("Grayscale");
         inverted = new JRadioButton("Inverted");
         y_axis = new JRadioButton("Y Axis");
+        cartoonify = new JRadioButton("Cartoonify");
         
         
         // Initilizing Button Group
@@ -62,13 +65,17 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         this.bg.add(getGrayscale());
         this.bg.add(getInverted());
         this.bg.add(getY_axis());
+        this.bg.add(getCartoonify());
         
         // Initilizing Listener
-        TypeImageListener listener = new TypeImageListener(this, new Object[]{getBasic(), getGrayscale(), getInverted(), getY_axis()});
+        // Make sure when adding new filters to register the JButtons in the object array
+        // Or the Buttons will not register when clicked.
+        TypeImageListener listener = new TypeImageListener(this, new Object[]{getBasic(), getGrayscale(), getInverted(), getY_axis(), getCartoonify()});
         getBasic().addItemListener(listener);
         getGrayscale().addItemListener(listener);
         getInverted().addItemListener(listener);
         getY_axis().addItemListener(listener);
+        getCartoonify().addItemListener(listener);
 
         // Initilizing Font for each Button
         Font font = new Font(Font.MONOSPACED, Font.PLAIN, 17);
@@ -76,6 +83,7 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         getGrayscale().setFont(font);
         getInverted().setFont(font);
         getY_axis().setFont(font);
+        getCartoonify().setFont(font);
                
         // Adding to Panel
         add(header);
@@ -84,6 +92,7 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
         add(getGrayscale());
         add(getInverted());
         add(getY_axis());
+        add(getCartoonify());
     }
 
     @Override
@@ -124,5 +133,12 @@ public class TypeImageSelectionPanel extends APanel<TypeImageSelectionPanel> {
      */
     public ButtonGroup getButtonGroup() {
         return bg;
+    }
+
+    /**
+     * @return the cartoonify
+     */
+    public JRadioButton getCartoonify() {
+        return cartoonify;
     }
 }

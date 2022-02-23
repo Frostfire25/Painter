@@ -17,8 +17,15 @@ import java.awt.Image;
  */
 public class BaseImage extends AImage<BaseImage> implements Filterable {
 
+    /**
+     * Default Constructor
+     * 
+     * @param frame Super frame
+     * @param baseImage Basic version of the image
+     */
     public BaseImage(Frame frame, Image baseImage) {
         super(frame, baseImage, ImageType.BASE_IMAGE);
+        initTotalFocusListnersForSubComponents();
     }
     
     @Override
@@ -55,9 +62,10 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
         // Draws the box around the image
         for(int i = 1; i <= 7; i++) {
             g.draw3DRect(ImagePanel.IMAGE_X_POINT-i, ImagePanel.IMAGE_Y_POINT-i, ImageManager.IMAGE_WIDTH+1, ImageManager.IMAGE_HEIGHT+1, false);
-        }
-                
+        }         
     }
+    
+    
 
        
 }

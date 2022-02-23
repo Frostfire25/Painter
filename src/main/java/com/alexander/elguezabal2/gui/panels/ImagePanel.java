@@ -40,6 +40,7 @@ public class ImagePanel extends APanel<ImagePanel> {
         setBackground(Color.LIGHT_GRAY);
         
         init();
+        initTotalFocusListnersForSubComponents();        
     }
     
     private void init() {

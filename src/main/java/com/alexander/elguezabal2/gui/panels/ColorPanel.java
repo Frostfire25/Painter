@@ -35,7 +35,6 @@ public class ColorPanel extends APanel<ColorPanel> {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        System.out.println("called");
         g.drawImage(image, WIDTH-1, HEIGHT-1, this);
     }
 

@@ -41,6 +41,7 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         init();
+        initTotalFocusListnersForSubComponents();
     }
     
     /**
@@ -94,6 +95,7 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         add(none);
         add(new JLabel("\n\n "));
         add(selectColor);
+        
     }
 
     @Override

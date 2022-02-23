@@ -74,7 +74,8 @@ public class DrawingManager {
                  //Point point1 = MouseInfo.getPointerInfo().getLocation();
                  //System.out.println(point1.getX() + " " + point1.getY());
 
-                if(isDrawing) {                    
+                if(isDrawing) {   
+                    System.out.println("drawing");
                     Point oP = MouseInfo.getPointerInfo().getLocation();
                     Point point = new Point((int) (oP.getX() - IMAGE_AWAY_FROM_BORDER_X), (int) (oP.getY() - IMAGE_AWAY_FROM_BORDER_Y));
                                         

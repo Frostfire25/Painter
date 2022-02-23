@@ -30,6 +30,7 @@ public class HeaderPanel extends APanel<HeaderPanel> {
         
         
         init();
+        initTotalFocusListnersForSubComponents();
     }
     
         

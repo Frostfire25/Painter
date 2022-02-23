@@ -24,6 +24,8 @@ public class YAxisMirroredImage extends AImage<YAxisMirroredImage> implements Fi
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));
+        
+        initTotalFocusListnersForSubComponents();        
     }
     
     @Override
