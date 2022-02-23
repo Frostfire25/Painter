@@ -4,10 +4,13 @@
  */
 package com.alexander.elguezabal2.gui.panels;
 
+import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.frames.ColorPalleteFrame;
 import com.alexander.elguezabal2.gui.listeners.TypeToolListener;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -31,6 +34,8 @@ public class DrawingPanel extends APanel<DrawingPanel> {
     
     private JButton selectColor;
     
+    private JLabel currentColor;
+    
     /**
      * Default constructor 
      * 
@@ -53,7 +58,11 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         
         // Initilizing JLabels
         this.header = new JLabel("Drawing Tools  ");
-        header.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
+        this.header.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
+        
+        this.currentColor = new JLabel("Current Color");
+        this.currentColor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+
         
         // Initilizing Radio Buttons
         pen = new JRadioButton("Pen");
@@ -95,8 +104,33 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         add(none);
         add(new JLabel("\n\n "));
         add(selectColor);
-        
+        add(currentColor);
     }
+    
+     /**
+     * Paints current paint color on screen.
+     * 
+     * @param g Graphics.
+     */
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        Color color = Painter.getDrawingManager().getCurrentColor();
+        
+        g.drawRect(40, 190, 31, 31);
+        
+        g.setColor(color);
+        g.fillRect(41, 191, 30, 30);   
+    }
+    
+    /**
+     * When the current color changes, the graphics must also change
+     */
+    public void updateCurrentColor() {
+        repaint();
+    }
+    
 
     @Override
     public DrawingPanel get() {

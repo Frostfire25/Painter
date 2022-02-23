@@ -138,4 +138,15 @@ public class DrawingManager {
         }
     }
     
+    /**
+     * Gets the current color of the current drawing tool
+     * 
+     * @return Color of the current drawing tool.
+     */
+    public Color getCurrentColor() {
+        if(selectedTool == null || selectedTool.getToolType() == ToolType.NONE) return Color.BLACK;
+        
+        return selectedTool.getColor();
+    }
+    
 }

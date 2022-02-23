@@ -13,10 +13,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.stream.IntStream;
 
 /**
  *

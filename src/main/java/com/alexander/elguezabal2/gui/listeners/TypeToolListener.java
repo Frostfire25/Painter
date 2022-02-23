@@ -4,6 +4,7 @@
  */
 package com.alexander.elguezabal2.gui.listeners;
 
+import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.panels.DrawingPanel;
 import com.alexander.elguezabal2.managers.DrawingManager;
 import com.alexander.elguezabal2.managers.drawing.ToolType;
@@ -40,6 +41,9 @@ public class TypeToolListener extends AListener<TypeToolListener, DrawingPanel> 
         
         // Changes the Type
         DrawingManager.changeSelectedTool(toolType);
+        
+        // Updates the current color
+        Painter.getFrame().getDrawingPanel().updateCurrentColor();
     }
 
     @Override

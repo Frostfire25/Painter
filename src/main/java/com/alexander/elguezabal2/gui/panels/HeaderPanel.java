@@ -5,6 +5,7 @@
 package com.alexander.elguezabal2.gui.panels;
 
 import com.alexander.elguezabal2.gui.Frame;
+import com.alexander.elguezabal2.gui.listeners.HotkeysButtonListener;
 import com.alexander.elguezabal2.gui.listeners.LoadImageListener;
 import com.alexander.elguezabal2.gui.listeners.SaveImageListener;
 import java.awt.FlowLayout;
@@ -18,6 +19,7 @@ public class HeaderPanel extends APanel<HeaderPanel> {
         
     private JButton loadImageButton;
     private JButton saveImageButton;
+    private JButton hotkeysButton;
     
      /**
      * Default constructor 
@@ -40,6 +42,7 @@ public class HeaderPanel extends APanel<HeaderPanel> {
     private void init() {
         this.loadImageButton = new JButton("Load Image");
         this.saveImageButton = new JButton("Save Image");
+        this.hotkeysButton = new JButton("Hot Keys");
 
         // Initilizes Listeners
         LoadImageListener loadImageListener = new LoadImageListener(this, new Object[]{loadImageButton});
@@ -48,8 +51,12 @@ public class HeaderPanel extends APanel<HeaderPanel> {
         SaveImageListener saveImageListener = new SaveImageListener(this, new Object[]{saveImageButton});
         this.saveImageButton.addActionListener(saveImageListener);
         
+        HotkeysButtonListener hotkeysButtonListener = new HotkeysButtonListener(this, new Object[]{hotkeysButton});
+        this.hotkeysButton.addActionListener(hotkeysButtonListener);
+        
         add(loadImageButton);
         add(saveImageButton);
+        add(hotkeysButton);
     }
 
     @Override

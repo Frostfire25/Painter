@@ -37,6 +37,9 @@ public class ColorPalleteListener extends AListener<ColorPalleteListener, ColorP
         
         // Closes the frame
         getAPanel().getFrame().setVisible(false);
+        
+        // Updates the current color
+        Painter.getFrame().getDrawingPanel().updateCurrentColor();
     }
 
     @Override
