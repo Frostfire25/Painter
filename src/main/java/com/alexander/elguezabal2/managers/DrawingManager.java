@@ -4,6 +4,7 @@
  */
 package com.alexander.elguezabal2.managers;
 
+import com.alexander.elguezabal2.managers.drawing.Marker;
 import com.alexander.elguezabal2.managers.drawing.Pen;
 import com.alexander.elguezabal2.managers.drawing.Tool;
 import com.alexander.elguezabal2.managers.drawing.ToolType;
@@ -20,6 +21,7 @@ import java.util.Set;
 public class DrawingManager {
     
     private static Pen pen;
+    private static Marker marker;
     private static Tool selectedTool;
     
     private static Set<Tool> allTools;
@@ -45,8 +47,10 @@ public class DrawingManager {
         // Instantilizes all tools and adds them to the allTools collection.
         allTools = new HashSet<>();
         pen = new Pen();
+        marker = new Marker();
         
         allTools.add(pen);
+        allTools.add(marker);
         
         selectedTool = null;
     }        

@@ -10,7 +10,8 @@ package com.alexander.elguezabal2.managers.drawing;
  */
 public enum ToolType {
     NONE("None"),
-    PEN("Pen");
+    PEN("Pen"),
+    MARKER("Marker");
 
     public String radioButtonName;
     

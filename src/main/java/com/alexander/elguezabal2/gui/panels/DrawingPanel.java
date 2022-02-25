@@ -28,6 +28,7 @@ public class DrawingPanel extends APanel<DrawingPanel> {
     private JLabel header;
     
     private JRadioButton pen;
+    private JRadioButton marker;
     private JRadioButton none;
 
     private ButtonGroup bg;
@@ -62,10 +63,10 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         
         this.currentColor = new JLabel("Current Color");
         this.currentColor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
-
         
         // Initilizing Radio Buttons
         pen = new JRadioButton("Pen");
+        marker = new JRadioButton("Marker");
         none = new JRadioButton("None");
              
         // Initilizing Buttons
@@ -73,12 +74,15 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         
         // Button Group
         bg.add(pen);
+        bg.add(marker);
         bg.add(none);
 
    
         // Listener 
-        TypeToolListener listener = new TypeToolListener(this, new Object[]{pen, none});
+        // Don't forget to add the object into the object array.
+        TypeToolListener listener = new TypeToolListener(this, new Object[]{pen, marker, none});
         pen.addItemListener(listener);
+        marker.addItemListener(listener);
         none.addItemListener(listener);
         
 
@@ -92,15 +96,16 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         // Font for each Button
         Font font = new Font(Font.MONOSPACED, Font.PLAIN, 17);
         pen.setFont(font);
+        marker.setFont(font);
         none.setFont(font);
         
         selectColor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
-
         
         // Adding to Panel
         add(header);
         add(new JLabel("\n "));
         add(pen);
+        add(marker);
         add(none);
         add(new JLabel("\n\n "));
         add(selectColor);
@@ -118,10 +123,10 @@ public class DrawingPanel extends APanel<DrawingPanel> {
         
         Color color = Painter.getDrawingManager().getCurrentColor();
         
-        g.drawRect(40, 190, 31, 31);
+        g.drawRect(40, 210, 31, 31);
         
         g.setColor(color);
-        g.fillRect(41, 191, 30, 30);   
+        g.fillRect(41, 211, 30, 30);   
     }
     
     /**
