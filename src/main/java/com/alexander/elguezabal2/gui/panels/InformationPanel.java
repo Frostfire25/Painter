@@ -9,6 +9,7 @@ import com.alexander.elguezabal2.gui.panels.APanel;
 import com.alexander.elguezabal2.managers.images.AImage;
 import com.alexander.elguezabal2.util.Pair;
 import com.alexander.elguezabal2.util.Triple;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,7 +22,7 @@ public class InformationPanel extends APanel<InformationPanel> {
 
     private final String resolutionHeader = "Resolution - %sx%s";
     private final String fileNameHeader = "Filename - %s";
-    private final String averageRGBHeader = "Average R,G,B - [%s,%s,%s]";
+    private final String averageRGBHeader = "Average R,G,B - [%r,%g,%b]";
 
     private JLabel resolution;
     private JLabel fileName;
@@ -34,8 +35,13 @@ public class InformationPanel extends APanel<InformationPanel> {
      */
     public InformationPanel(Frame frame) {
         super(frame);
-        init();
         
+        // Layout with changed vGap
+        FlowLayout flowLayout = new FlowLayout();
+        flowLayout.setHgap(25);
+        setLayout(flowLayout);
+        
+        init();
     }
 
     /**
@@ -46,7 +52,7 @@ public class InformationPanel extends APanel<InformationPanel> {
 
         this.resolution = new JLabel(new String(resolutionHeader).replaceAll("%s", "").replaceAll("x", ""));
         this.fileName = new JLabel(new String(fileNameHeader).replaceAll("%s", ""));
-        this.averageRGB = new JLabel(new String(averageRGBHeader).replaceAll("%s", "0"));
+        this.averageRGB = new JLabel(new String(averageRGBHeader).replaceAll("%r", "0").replaceAll("%g", "0").replaceAll("%b", "0"));
 
         this.resolution.setFont(font);
         this.fileName.setFont(font);
@@ -80,7 +86,10 @@ public class InformationPanel extends APanel<InformationPanel> {
         
         // Updates the rgb values
         Triple<Integer, Integer, Integer> rgbTriple = aImage.getAverageRGB();
-        this.averageRGB.setText(new String(averageRGBHeader).replace("%s", ""+rgbTriple.getValue1()).replace("%s", ""+rgbTriple.getValue2()).replace("%s", ""+rgbTriple.getValue3()));
+        this.averageRGB.setText(new String(averageRGBHeader)
+                .replace("%r", ""+rgbTriple.getValue1())
+                .replace("%g", ""+rgbTriple.getValue2())
+                .replace("%b", ""+rgbTriple.getValue3()));
         
         // Updates the screen
         revalidate();

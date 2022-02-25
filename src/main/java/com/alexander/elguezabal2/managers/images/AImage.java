@@ -194,10 +194,14 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
             }
         }
         
+        System.out.println((int) averageR.stream().mapToInt(n -> n).average().orElse(0));
+        System.out.println((int) averageG.stream().mapToInt(n -> n).average().orElse(0));
+        System.out.println((int) averageB.stream().mapToInt(n -> n).average().orElse(0));
+        
         // Returns the average of all the RGB values in a Triple
         return new Triple<>(
-                (int) averageR.stream().mapToInt(n -> n).average().orElse(0),
-                (int) averageG.stream().mapToInt(n -> n).average().orElse(0),
-                (int) averageB.stream().mapToInt(n -> n).average().orElse(0));
+                (int) averageR.stream().mapToInt(r -> r).average().orElse(0),
+                (int) averageG.stream().mapToInt(g -> g).average().orElse(0),
+                (int) averageB.stream().mapToInt(b -> b).average().orElse(0));
     }
 }
