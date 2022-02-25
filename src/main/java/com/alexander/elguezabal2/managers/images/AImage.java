@@ -77,7 +77,7 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
      * @param color Color to be painted
      * @return Returns a new Instance of the Image, with a pixel painted
      */
-    public Image paintPixel(Point point, Color color, int size) {
+    public Image paintPixel(Point point, Color color, int size) throws ArrayIndexOutOfBoundsException {
         Image image = getFilteredImage();
         // If the image is not usable, then don't use it
         if(image == null) return null;

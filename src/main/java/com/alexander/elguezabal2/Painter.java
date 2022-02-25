@@ -4,6 +4,7 @@ import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.managers.DrawingManager;
 import com.alexander.elguezabal2.managers.HotkeyManager;
 import com.alexander.elguezabal2.managers.ImageManager;
+import com.alexander.elguezabal2.timers.DrawingTimer;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -19,6 +20,8 @@ public class Painter {
     private static ImageManager mainImageManager;
     private static DrawingManager drawingManager;
     private static HotkeyManager hotkeyManager;
+    
+    private static DrawingTimer drawingTimer;
 
     public static void main(String[] args) {
 
@@ -28,9 +31,14 @@ public class Painter {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
 
+        // Managers
+        
         mainImageManager = new ImageManager();
         drawingManager = new DrawingManager();
         hotkeyManager = new HotkeyManager();
+        
+        // Timers
+        drawingTimer = new DrawingTimer(drawingManager);
 
         // Loads the frame 
         SwingUtilities.invokeLater(() -> {

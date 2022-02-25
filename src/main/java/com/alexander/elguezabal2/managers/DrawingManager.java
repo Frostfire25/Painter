@@ -4,21 +4,17 @@
  */
 package com.alexander.elguezabal2.managers;
 
-import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.managers.drawing.Pen;
 import com.alexander.elguezabal2.managers.drawing.Tool;
 import com.alexander.elguezabal2.managers.drawing.ToolType;
 import java.awt.Color;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Set;
 
 /**
- *
+ * Takes all the input and output for drawing.
+ * Painting is done in DrawingTimer.java
  * @author Alex
  */
 public class DrawingManager {
@@ -26,7 +22,7 @@ public class DrawingManager {
     private static Pen pen;
     private static Tool selectedTool;
     
-    private static HashSet<Tool> allTools;
+    private static Set<Tool> allTools;
     
     public DrawingManager() {        
         // Starts the init process
@@ -53,65 +49,18 @@ public class DrawingManager {
         allTools.add(pen);
         
         selectedTool = null;
-        
-        initTimer();
-    }
-    
-    private static final int IMAGE_AWAY_FROM_BORDER_X = 207;
-    private static final int IMAGE_AWAY_FROM_BORDER_Y = 186;
-    
-    /**
-     * Starts the timer for drawing
-     */
-    private void initTimer() {
-        long delay = 50L;
-        long period = 1L;
-        
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {        
-                 //Point point1 = MouseInfo.getPointerInfo().getLocation();
-                 //System.out.println(point1.getX() + " " + point1.getY());
-
-                if(isDrawing) {   
-                    System.out.println("drawing");
-                    Point oP = MouseInfo.getPointerInfo().getLocation();
-                    Point point = new Point((int) (oP.getX() - IMAGE_AWAY_FROM_BORDER_X), (int) (oP.getY() - IMAGE_AWAY_FROM_BORDER_Y));
-                                        
-                    if (!isOutOfBoudns(oP, selectedTool.getSize())) {
-                        selectedTool.draw(point);
-                    }
-                }
-            }
-        }, delay, period);
-
-    }
-    
-    /**
-     * Determines if the point is out of bounds for the picture
-     * 
-     * @param point The point to be checked
-     * @return true if it is out of bounds, false if not.
-     */
-    private boolean isOutOfBoudns(Point point, int size) {
-        if(point.getX() > (ImageManager.IMAGE_WIDTH + IMAGE_AWAY_FROM_BORDER_X + size) || point.getY() > (ImageManager.IMAGE_HEIGHT + IMAGE_AWAY_FROM_BORDER_Y + size))
-            return true;
-        
-        if(point.getX() < (IMAGE_AWAY_FROM_BORDER_X + size) || point.getY() < (IMAGE_AWAY_FROM_BORDER_Y + size))
-            return true;
-            
-        return false;
-    }
-   
-    private HashMap<Point, Color> pointToColor = new HashMap<>();
-    private boolean isDrawing = false;
+    }        
+     
+    private static boolean isDrawing = false;
     
     /**
      * Called when a person presses inside the draw table
      */
     public void pressed() {
-        if(selectedTool != null && selectedTool.getToolType() != ToolType.NONE) {
+        System.out.println(""+ (getSelectedTool() == null) + " Tool Name: " + getSelectedTool().getToolType().name());
+
+     
+        if(getSelectedTool() != null && getSelectedTool().getToolType() != ToolType.NONE && !isDrawing) {
             System.out.println("pressed");
             isDrawing = true;
         }
@@ -121,10 +70,9 @@ public class DrawingManager {
      * Called when a person releases inside the draw table
      */
     public void released() {
-        if(selectedTool != null && selectedTool.getToolType() != ToolType.NONE) {
-            System.out.println("released");
-            isDrawing = false;
-        }
+        // If the mouse is ever released, we always want it not to draw.
+        isDrawing = false;
+        
     }
         
     /**
@@ -133,8 +81,8 @@ public class DrawingManager {
      * @param color Color to be changed to
      */
     public void updateColor(Color color) {
-        if(selectedTool != null && selectedTool.getToolType() != ToolType.NONE) {
-            selectedTool.setColor(color);
+        if(getSelectedTool() != null && getSelectedTool().getToolType() != ToolType.NONE) {
+            getSelectedTool().setColor(color);
         }
     }
     
@@ -144,9 +92,23 @@ public class DrawingManager {
      * @return Color of the current drawing tool.
      */
     public Color getCurrentColor() {
-        if(selectedTool == null || selectedTool.getToolType() == ToolType.NONE) return Color.BLACK;
+        if(getSelectedTool() == null || getSelectedTool().getToolType() == ToolType.NONE) return Color.BLACK;
         
-        return selectedTool.getColor();
+        return getSelectedTool().getColor();
+    }
+
+    /**
+     * @return the isDrawing
+     */
+    public static boolean isDrawing() {
+        return isDrawing;
+    }
+
+    /**
+     * @return the selectedTool
+     */
+    public static Tool getSelectedTool() {
+        return selectedTool;
     }
     
 }
