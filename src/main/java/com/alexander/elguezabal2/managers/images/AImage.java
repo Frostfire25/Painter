@@ -7,12 +7,16 @@ package com.alexander.elguezabal2.managers.images;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.panels.APanel;
+import com.alexander.elguezabal2.util.Pair;
+import com.alexander.elguezabal2.util.Triple;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * @author Alex
@@ -23,6 +27,8 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
     private Image baseImage;
     public Image filteredImage; 
     private ImageType imageType;
+    
+    private String fileName;
         
     /**
      * Default constructor
@@ -31,11 +37,12 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
      * @param imageType The type of image that this class is
      * 
      */
-    public AImage(Frame frame, Image baseImage, ImageType imageType) {
+    public AImage(Frame frame, Image baseImage, ImageType imageType, String filename) {
         super(frame);
         updateImage(baseImage);
         this.imageType = imageType;
         setBackground(Color.LIGHT_GRAY);
+        this.fileName = filename;
     }
     
     /**
@@ -138,5 +145,59 @@ public abstract class AImage<T extends APanel> extends APanel<T> implements Filt
         // Return the buffered image
         return bimage;
     }
-       
+        
+    /**
+     * Calculates the resolution for an image
+     * Calculates the width and height in pixels
+     * 
+     * @return A Pair of the Width value to the Height value
+     */
+    public Pair<Integer,Integer> calculateResolution() {
+        if(getFilteredImage() == null)
+            return new Pair(0, 0);
+        
+        return new Pair(getFilteredImage().getWidth(frame), getFilteredImage().getHeight(frame));
+    }
+    
+    /**
+     * Gets the filename for this image
+     * @return Filename of this image
+     */
+    public String getFilename() {
+        return fileName;
+    }
+    
+    /**
+     * Finds the average RGB values
+     * @return A triple of all the R.G.B. values averaged with each individual RGB value
+     */
+    public Triple<Integer, Integer, Integer> getAverageRGB() {
+        if(getFilteredImage() == null) return new Triple<>(0,0,0);
+        
+        // List storing all of the values
+        ArrayList<Integer> averageR = new ArrayList<Integer>();
+        ArrayList<Integer> averageG = new ArrayList<Integer>();
+        ArrayList<Integer> averageB = new ArrayList<Integer>();
+
+        // Convers the image to a bufferedImage.
+        BufferedImage bufferedImage = toBufferedImage(getFilteredImage());
+        
+        // Loops over every pixel
+        for(int i = 0; i < bufferedImage.getWidth(); i++) {
+            for(int j = 0; j < bufferedImage.getHeight(); j++) {
+                Color color = new Color(bufferedImage.getRGB(i, j));
+                
+                averageR.add(color.getRed());
+                averageG.add(color.getBlue());
+                averageB.add(color.getGreen());
+
+            }
+        }
+        
+        // Returns the average of all the RGB values in a Triple
+        return new Triple<>(
+                (int) averageR.stream().mapToInt(n -> n).average().orElse(0),
+                (int) averageG.stream().mapToInt(n -> n).average().orElse(0),
+                (int) averageB.stream().mapToInt(n -> n).average().orElse(0));
+    }
 }

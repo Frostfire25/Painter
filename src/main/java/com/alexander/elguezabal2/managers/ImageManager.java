@@ -52,19 +52,19 @@ public class ImageManager {
      * 
      * @param image Image to be loaded in.
      */
-    public void loadImage(Image image) {       
+    public void loadImage(Image image, String filename) {       
         // Scales the original image
         Image scaled = image.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, Image.SCALE_DEFAULT);
         
         // Resets all images, because we have a new image, new image templates.
         allImages = new HashSet<>();
-        
+                
         // Updates the images 
-        this.baseImage = new BaseImage(Painter.getFrame(), scaled);
-        this.grayScaleImage = new GrayScaleImage(Painter.getFrame(), scaled);
-        this.invertedColorsImage = new InvertedColorsImage(Painter.getFrame(), scaled);
-        this.yAxisMirroredImage = new YAxisMirroredImage(Painter.getFrame(), scaled);
-        this.cartoonifyImage = new CartoonifyImage(Painter.getFrame(), scaled);
+        this.baseImage = new BaseImage(Painter.getFrame(), scaled, filename);
+        this.grayScaleImage = new GrayScaleImage(Painter.getFrame(), scaled, filename);
+        this.invertedColorsImage = new InvertedColorsImage(Painter.getFrame(), scaled, filename);
+        this.yAxisMirroredImage = new YAxisMirroredImage(Painter.getFrame(), scaled, filename);
+        this.cartoonifyImage = new CartoonifyImage(Painter.getFrame(), scaled, filename);
         
         // Adds the image type to the frames collection
         allImages.add(baseImage);
@@ -79,7 +79,7 @@ public class ImageManager {
        
         // Updates the image on screen
         Painter.getFrame().getImagePanel().addAllPanels(allImages);
-        Painter.getFrame().getImagePanel().updateImage();
+        Painter.getFrame().getImagePanel().updateImage(true);
     }
     
     public AImage getImage() {
@@ -117,7 +117,7 @@ public class ImageManager {
         aImage.paintPixel(point, color, size);
         
         // Updates the image
-        Painter.getFrame().getImagePanel().updateImage();
+        Painter.getFrame().getImagePanel().updateImage(false);
     }
     
     /**
@@ -152,7 +152,7 @@ public class ImageManager {
         
        try {
            if (file != null) {
-               loadImage(ImageIO.read(file));
+               loadImage(ImageIO.read(file), file.getName());
            }
        } catch (IOException e) {
            e.printStackTrace();

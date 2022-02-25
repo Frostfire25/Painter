@@ -20,8 +20,8 @@ import java.awt.image.BufferedImage;
  */
 public class GrayScaleImage extends AImage<GrayScaleImage> implements Filterable {
 
-    public GrayScaleImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.GRAYSCALE_IMAGE);
+    public GrayScaleImage(Frame frame, Image baseImage, String filename) {
+        super(frame, baseImage, ImageType.GRAYSCALE_IMAGE, filename);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));

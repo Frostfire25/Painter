@@ -42,7 +42,7 @@ public class TypeImageListener extends AListener<TypeImageListener, TypeImageSel
         ImageManager.setOnScreen(imageType);
         
         // Update the Image Panel
-        Painter.getFrame().getImagePanel().updateImage();
+        Painter.getFrame().getImagePanel().updateImage(true);
     }
 
     @Override

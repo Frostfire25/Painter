@@ -4,9 +4,9 @@ import com.alexander.elguezabal2.gui.listeners.HotkeyListener;
 import com.alexander.elguezabal2.gui.panels.DrawingPanel;
 import com.alexander.elguezabal2.gui.panels.HeaderPanel;
 import com.alexander.elguezabal2.gui.panels.ImagePanel;
+import com.alexander.elguezabal2.gui.panels.InformationPanel;
 import com.alexander.elguezabal2.gui.panels.TypeImageSelectionPanel;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
@@ -37,6 +37,7 @@ public class Frame extends JFrame {
     private ImagePanel imagePanel;
     private TypeImageSelectionPanel typeImageSelectionPanel;
     private DrawingPanel drawingPanel;
+    public InformationPanel informationPanel;
 
     // Total-Focus Listener
     private static HotkeyListener hotkeyListener;
@@ -113,11 +114,13 @@ public class Frame extends JFrame {
         this.imagePanel = new ImagePanel(this);
         this.typeImageSelectionPanel = new TypeImageSelectionPanel(this);
         this.drawingPanel = new DrawingPanel(this);
+        this.informationPanel = new InformationPanel(this);
 
         add(this.getTypeImageSelectionPanel(), BorderLayout.EAST);
         add(this.getHeaderPanel(), BorderLayout.NORTH);
         add(this.getImagePanel(), BorderLayout.CENTER);
         add(this.getDrawingPanel(), BorderLayout.WEST);
+        add(this.informationPanel, BorderLayout.SOUTH);
     }
     
     /**
@@ -161,6 +164,13 @@ public class Frame extends JFrame {
      */
     public static HotkeyListener getHotkeyListener() {
         return hotkeyListener;
+    }
+
+    /**
+     * @return the informationPanel
+     */
+    public InformationPanel getInformationPanel() {
+        return informationPanel;
     }
    
 }

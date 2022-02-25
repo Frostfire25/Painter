@@ -19,8 +19,8 @@ import java.awt.image.BufferedImage;
  */
 public class InvertedColorsImage extends AImage<InvertedColorsImage> implements Filterable {
 
-    public InvertedColorsImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.INVERTED_COLOR_IMAGE);
+    public InvertedColorsImage(Frame frame, Image baseImage, String filename) {
+        super(frame, baseImage, ImageType.INVERTED_COLOR_IMAGE, filename);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));

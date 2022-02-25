@@ -57,7 +57,7 @@ public class DrawingManager {
      * Called when a person presses inside the draw table
      */
     public void pressed() {
-        System.out.println(""+ (getSelectedTool() == null) + " Tool Name: " + getSelectedTool().getToolType().name());
+        // System.out.println(""+ (getSelectedTool() == null) + " Tool Name: " + getSelectedTool().getToolType().name());
 
      
         if(getSelectedTool() != null && getSelectedTool().getToolType() != ToolType.NONE && !isDrawing) {

@@ -23,8 +23,8 @@ public class BaseImage extends AImage<BaseImage> implements Filterable {
      * @param frame Super frame
      * @param baseImage Basic version of the image
      */
-    public BaseImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.BASE_IMAGE);
+    public BaseImage(Frame frame, Image baseImage, String filename) {
+        super(frame, baseImage, ImageType.BASE_IMAGE, filename);
         initTotalFocusListnersForSubComponents();
     }
     

@@ -18,7 +18,7 @@ public class DrawingTimer extends ATimer<DrawingTimer> {
     private DrawingManager drawingManger;
     
     private static final int IMAGE_AWAY_FROM_BORDER_X = 207;
-    private static final int IMAGE_AWAY_FROM_BORDER_Y = 186;
+    private static final int IMAGE_AWAY_FROM_BORDER_Y = 146;
     
     public DrawingTimer(DrawingManager drawingManger) {
         super(50, 1);

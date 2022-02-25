@@ -7,7 +7,6 @@ package com.alexander.elguezabal2.gui.panels;
 import com.alexander.elguezabal2.Painter;
 import com.alexander.elguezabal2.gui.Frame;
 import com.alexander.elguezabal2.gui.listeners.DrawingListener;
-import com.alexander.elguezabal2.gui.listeners.HotkeyListener;
 import com.alexander.elguezabal2.gui.listeners.MouseListener;
 import com.alexander.elguezabal2.managers.ImageManager;
 import com.alexander.elguezabal2.managers.images.AImage;
@@ -64,7 +63,7 @@ public class ImagePanel extends APanel<ImagePanel> {
     /**
      * Updates the image on screen
      */
-    public void updateImage() {  
+    public void updateImage(boolean updateInformation) {  
         // Pain the current image on the screen.
         repaint();
         
@@ -78,13 +77,17 @@ public class ImagePanel extends APanel<ImagePanel> {
             
             System.out.println(""+aImage.getImageType().name());
             
-            repaint();
+            // Updates the information, Only when an not drawing or there will be too much lag.
+            if(updateInformation) Painter.getFrame().getInformationPanel().update(aImage);
+            
+            // Repaints what's on screen.
+            repaint();            
         }
     }
     
     // Info for the image management
     public static final int IMAGE_X_POINT = 35;
-    public static final int IMAGE_Y_POINT = 112;
+    public static final int IMAGE_Y_POINT = 72;
         
      /**
      * Paints  surrounding box on screen

@@ -27,8 +27,8 @@ public class CartoonifyImage extends AImage<CartoonifyImage> {
      * @param frame Super frame
      * @param baseImage Basic version of the image
      */
-    public CartoonifyImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.CARTOONIFY_IMAGE);
+    public CartoonifyImage(Frame frame, Image baseImage, String filename) {
+        super(frame, baseImage, ImageType.CARTOONIFY_IMAGE, filename);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));

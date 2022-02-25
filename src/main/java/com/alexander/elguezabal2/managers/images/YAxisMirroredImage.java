@@ -19,8 +19,8 @@ import java.awt.image.BufferedImage;
  */
 public class YAxisMirroredImage extends AImage<YAxisMirroredImage> implements Filterable {
 
-    public YAxisMirroredImage(Frame frame, Image baseImage) {
-        super(frame, baseImage, ImageType.Y_AXIS_MIRRORED_IMAGE);
+    public YAxisMirroredImage(Frame frame, Image baseImage, String filename) {
+        super(frame, baseImage, ImageType.Y_AXIS_MIRRORED_IMAGE, filename);
         
         // Sets the filtered image
         setFilteredImage(filter(baseImage));
