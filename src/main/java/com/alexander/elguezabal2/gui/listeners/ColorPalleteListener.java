@@ -29,11 +29,16 @@ public class ColorPalleteListener extends AListener<ColorPalleteListener, ColorP
         // Current Mouse Location
         Point point = MouseInfo.getPointerInfo().getLocation();
         
+        Color color = null;
+        try {
         // Color at Location
-        Color color = getColorAt(getAPanel().getFrame(), point);
+         color = getColorAt(getAPanel().getFrame(), point);
+        } catch(ArrayIndexOutOfBoundsException e) {          
+        }
         
         // Updates the Color of the current Tool.
-        Painter.getDrawingManager().updateColor(color);
+        if(color != null)
+            Painter.getDrawingManager().updateColor(color);
         
         // Closes the frame
         getAPanel().getFrame().setVisible(false);
